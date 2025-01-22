@@ -1,0 +1,41 @@
+// import logo from './logo.svg';
+import React from "react";
+import "./App.css";
+import "./scss/app.scss";
+
+import Header from "./components/Header";
+import Categories from "./components/Categories";
+import Sort from "./components/Sort";
+import PizzaBlock from "./components/PizzaBlock";
+
+function App() {
+  return (
+    <div className="App">
+      <div className="wrapper">
+        <Header />
+        <div className="content">
+          <div className="container">
+            <div className="content__top">
+              <Categories />
+              <Sort />
+            </div>
+            <h2 className="content__title">Все пиццы</h2>
+            <div className="content__items">
+              <PizzaBlock title="pizza mazeratti 4 sira" prise="400" />
+              <PizzaBlock title="idid v popu" prise="400" />
+              <PizzaBlock />
+              <PizzaBlock />
+              <PizzaBlock />
+              <PizzaBlock />
+              <PizzaBlock />
+              <PizzaBlock />
+              <PizzaBlock />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
