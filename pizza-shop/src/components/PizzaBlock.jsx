@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
+//тк я добавила React.useState(0), то не надо импортировать{ useState }
+import React from "react";
 
 export default function PizzaBlock({ title, price }) {
-  const [pizzaCount, setPizzaCount] = useState(0);
+  const [pizzaCount, setPizzaCount] = React.useState(0);
 
   const countOnClick = () => {
     setPizzaCount(pizzaCount + 1);
