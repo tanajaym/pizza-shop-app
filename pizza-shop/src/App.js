@@ -21,8 +21,8 @@ function App() {
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
-              <PizzaBlock title="pizza mazeratti 4 sira" prise="400" />
-              <PizzaBlock title="idid v popu" prise="400" />
+              <PizzaBlock title="pizza mazeratti 4 sira" price={623} />
+              <PizzaBlock title="pizza koroli vostoka" price={179} />
               <PizzaBlock />
               <PizzaBlock />
               <PizzaBlock />
