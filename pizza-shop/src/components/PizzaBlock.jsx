@@ -2,36 +2,35 @@
 //тк я добавила React.useState(0), то не надо импортировать{ useState }
 import React from "react";
 
-export default function PizzaBlock({ title, price }) {
-  const [pizzaCount, setPizzaCount] = React.useState(0);
+export default function PizzaBlock({ title, price, image, sizes, type }) {
+  // const [pizzaCount, setPizzaCount] = React.useState(0);
+  //
+  // const countOnClick = () => {
+  //   setPizzaCount(pizzaCount + 1);
+  // };
 
-  const countOnClick = () => {
-    setPizzaCount(pizzaCount + 1);
-  };
+  const pizzaTypes = ["тонкое", "традиционное"];
 
   return (
     <div className="pizza-block">
-      <img
-        className="pizza-block__image"
-        src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
-        alt="Pizza"
-      />
+      <img className="pizza-block__image" src={image} alt="Pizza" />
       <h4 className="pizza-block__title">{title}</h4>
       <div className="pizza-block__selector">
         <ul>
-          <li className="active">тонкое</li>
-          <li>традиционное</li>
+          {type.map((typeId) => (
+            <li>{pizzaTypes[typeId]}</li>
+          ))}
         </ul>
         <ul>
-          <li className="active">26 см.</li>
-          <li>30 см.</li>
-          <li>40 см.</li>
+          {sizes.map((size) => (
+            <li>{size} см.</li>
+          ))}
         </ul>
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {price}</div>
         <button
-          onClick={countOnClick}
+          // onClick={countOnClick}
           className="button button--outline button--add"
         >
           <svg
@@ -47,7 +46,7 @@ export default function PizzaBlock({ title, price }) {
             />
           </svg>
           <span>Добавить</span>
-          <i>{pizzaCount}</i>
+          <i>0</i>
         </button>
       </div>
     </div>

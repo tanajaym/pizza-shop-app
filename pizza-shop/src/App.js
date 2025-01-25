@@ -8,6 +8,8 @@ import Categories from "./components/Categories";
 import Sort from "./components/Sort";
 import PizzaBlock from "./components/PizzaBlock";
 
+import pizzaDataBase from "./assets/pizzaDataBase.json";
+
 function App() {
   return (
     <div className="App">
@@ -21,15 +23,15 @@ function App() {
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
-              <PizzaBlock title="pizza mazeratti 4 sira" price={623} />
-              <PizzaBlock title="pizza koroli vostoka" price={179} />
-              <PizzaBlock />
-              <PizzaBlock />
-              <PizzaBlock />
-              <PizzaBlock />
-              <PizzaBlock />
-              <PizzaBlock />
-              <PizzaBlock />
+              {pizzaDataBase.map((obj) => (
+                <PizzaBlock
+                  title={obj.title}
+                  price={obj.price}
+                  image={obj.image}
+                  sizes={obj.sizes}
+                  type={obj.types}
+                />
+              ))}
             </div>
           </div>
         </div>
