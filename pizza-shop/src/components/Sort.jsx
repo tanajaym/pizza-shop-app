@@ -2,6 +2,9 @@ import React from "react";
 
 export default function Sort() {
   const [open, setOpen] = React.useState(false);
+  const [sortSelected, setSortSelected] = React.useState(0);
+  const sortList = ["популярности", "цене", "алфавиту"];
+
   return (
     <div className="sort">
       <div className="sort__label">
@@ -22,21 +25,19 @@ export default function Sort() {
       </div>
       {open && (
         <div className="sort__popup">
-
-          {/*<ul>*/}
-          {/*  <li className="active">популярности</li>*/}
-          {/*  <li>цене</li>*/}
-          {/*  <li>алфавиту</li>*/}
-          {/*</ul>*/}
+          <ul>
+            {sortList.map((name, index) => (
+              <li
+                key={index}
+                onClick={() => setSortSelected(index)}
+                className={sortSelected === index ? "active" : ""}
+              >
+                {name}
+              </li>
+            ))}
+          </ul>
         </div>
       )}
-      {/*  <div className="sort__popup">*/}
-      {/*      <ul>*/}
-      {/*          <li className="active">популярности</li>*/}
-      {/*          <li>цене</li>*/}
-      {/*          <li>алфавиту</li>*/}
-      {/*      </ul>*/}
-      {/*</div>*/}
     </div>
   );
-
+}
