@@ -25,6 +25,7 @@ function App() {
             <div className="content__items">
               {pizzaDataBase.map((obj) => (
                 <PizzaBlock
+                  key={obj.id}
                   title={obj.title}
                   price={obj.price}
                   image={obj.image}
