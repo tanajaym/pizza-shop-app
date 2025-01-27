@@ -8,9 +8,22 @@ import Categories from "./components/Categories";
 import Sort from "./components/Sort";
 import PizzaBlock from "./components/PizzaBlock";
 
-import pizzaDataBase from "./assets/pizzaDataBase.json";
+// import pizzaDataBase from "./assets/pizzaDataBase.json";
+// const pizzaData = [];
 
 function App() {
+
+  const [items, setItems] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch(`https://6797b1f3c2c861de0c6daede.mockapi.io/items`)
+        .then((response) => {
+          return response.json();
+        }).then((jsonArray) => {
+          setItems(jsonArray);
+    });
+  });
+
   return (
     <div className="App">
       <div className="wrapper">
@@ -23,7 +36,7 @@ function App() {
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
-              {pizzaDataBase.map((obj) => (
+              {items.map((obj) => (
                 <PizzaBlock
                   key={obj.id}
                   title={obj.title}
