@@ -8,8 +8,7 @@ import Categories from "./components/Categories";
 import Sort from "./components/Sort";
 import PizzaBlock from "./components/PizzaBlock";
 
-// import pizzaDataBase from "./assets/pizzaDataBase.json";
-// const pizzaData = [];
+
 
 function App() {
 
