@@ -16,12 +16,11 @@ function App() {
 
   React.useEffect(() => {
     fetch(`https://6797b1f3c2c861de0c6daede.mockapi.io/items`)
-        .then((response) => {
-          return response.json();
-        }).then((jsonArray) => {
+        .then((response) => response.json())
+        .then((jsonArray) => {
           setItems(jsonArray);
     });
-  });
+  }, []);
 
   return (
     <div className="App">
