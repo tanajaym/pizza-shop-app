@@ -6,20 +6,17 @@ import "./scss/app.scss";
 import Header from "./components/Header";
 import Categories from "./components/Categories";
 import Sort from "./components/Sort";
-import PizzaBlock from "./components/PizzaBlock";
-
-
-
+import Index from "./components/PizzaBlock";
+// import PizzaBlockSkeleton from "./components/PizzaBlock/PizzaBlockSkeleton";
 function App() {
-
   const [items, setItems] = React.useState([]);
 
   React.useEffect(() => {
     fetch(`https://6797b1f3c2c861de0c6daede.mockapi.io/items`)
-        .then((response) => response.json())
-        .then((jsonArray) => {
-          setItems(jsonArray);
-    });
+      .then((response) => response.json())
+      .then((jsonArray) => {
+        setItems(jsonArray);
+      });
   }, []);
 
   return (
@@ -35,7 +32,7 @@ function App() {
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
               {items.map((obj) => (
-                <PizzaBlock
+                <Index
                   key={obj.id}
                   title={obj.title}
                   price={obj.price}

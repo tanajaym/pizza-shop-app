@@ -2,7 +2,7 @@
 //тк я добавила React.useState(0), то не надо импортировать{ useState }
 import React from "react";
 
-export default function PizzaBlock({ title, price, image, sizes, type }) {
+export default function Index({ title, price, image, sizes, type }) {
   // const [pizzaCount, setPizzaCount] = React.useState(0);
   //
   // const countOnClick = () => {
