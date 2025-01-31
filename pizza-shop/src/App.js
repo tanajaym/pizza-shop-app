@@ -8,6 +8,7 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./components/pages/Home";
 import NotFoundPage from "./components/pages/NotFoundPage";
+import Cart from "./components/pages/Cart";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
             {/*<NotFoundPage />*/}
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/blabla" element={<h1>Blablable</h1>} />
+              <Route path="/cart" element={<Cart />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </div>
