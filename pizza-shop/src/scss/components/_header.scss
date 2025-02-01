@@ -8,6 +8,29 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: 66.25rem){
+      flex-direction: column;
+      .header__cart{
+        margin-top: 2rem;
+        //margin-bottom: 1rem;
+        //position: absolute;
+        //top: 9.4em;
+        //right: 3.5rem;
+    }
+
+    @media (max-width: 50rem){
+      flex-direction: column;
+
+      .header__cart{
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        top: 9.4em;
+        right: 3.5rem;
+        //здесь кнопич карзины. Верстка может лететь
+        //тк позиция абсолют
+      }
+    }
   }
 
   &__logo {
@@ -29,4 +52,5 @@
       color: #7b7b7b;
     }
   }
+}
 }
