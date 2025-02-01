@@ -16,14 +16,12 @@ function App() {
       <div className="wrapper">
         <Header />
         <div className="content">
-          <div className="container">
-            {/*<NotFoundPage />*/}
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </div>
+          {/*<NotFoundPage />*/}
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
         </div>
       </div>
     </div>
