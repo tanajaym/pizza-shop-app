@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import NotFoundBlock from "../notFoundBlock/NotFoundBlock";
 
@@ -394,8 +395,8 @@ const Cart = () => {
             </span>
           </div>
           <div className="cart__bottom-buttons">
-            <a
-              href="/"
+            <Link
+              to="/"
               className="button button--outline button--add go-back-btn"
             >
               <svg
@@ -415,7 +416,7 @@ const Cart = () => {
               </svg>
 
               <span>Вернуться назад</span>
-            </a>
+            </Link>
             <div className="button pay-btn">
               <span>Оплатить сейчас</span>
             </div>

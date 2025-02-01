@@ -53,10 +53,6 @@ body {
     }
   }
 
-  .content__items{
-    display: block;
-
-  }
 
 
   &__top {
@@ -107,6 +103,11 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .content__items{
+    display: block;
+
   }
 
   .content__title {
