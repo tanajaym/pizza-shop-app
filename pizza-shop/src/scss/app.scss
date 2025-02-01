@@ -15,6 +15,11 @@ body {
   margin: 50px auto;
   border-radius: 10px;
   max-width: 1400px;
+
+  @media (max-width: 41rem){
+    width: calc(100vw - 30px);
+    margin-top: 20px;
+  }
 }
 
 .content {
@@ -22,6 +27,8 @@ body {
 
   &__title {
     margin: 35px 0;
+    font-size: 2rem;
+    font-weight: bolder;
   }
 
   &__items {
@@ -38,12 +45,15 @@ body {
 
     @media (max-width: 66.25rem){
       grid-template-columns: repeat(2, 1fr);
-      }
     }
 
     @media (max-width: 50rem){
       grid-template-columns: repeat(1, 1fr);
+      justify-content: center;
     }
+    }
+
+
 
 
   &__top {
@@ -55,13 +65,14 @@ body {
 
       .categories{
         width: 100%;
-        overflow: scroll;
+        overflow: auto;
 
         ul{
           width: 49rem;
         }
       }
       .sort{
+        margin-left: 1.5rem;
         b{
           display: none;
         }
