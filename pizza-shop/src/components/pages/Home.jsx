@@ -8,6 +8,8 @@ import PizzaBlockSkeleton from "../PizzaBlock/PizzaBlockSkeleton";
 const Home = () => {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
+  const [categoryId, setCategoryId] = React.useState(0);
+  const [sort, setSort] = React.useState(0);
 
   React.useEffect(() => {
     fetch(`https://6797b1f3c2c861de0c6daede.mockapi.io/items`)
@@ -16,12 +18,13 @@ const Home = () => {
         setItems(jsonArray);
         setIsLoading(false);
       });
+    window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="container">
       <div className="content__top">
-        <Categories />
+        <Categories value={categoryId} />
         <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
