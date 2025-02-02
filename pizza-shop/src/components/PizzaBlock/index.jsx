@@ -15,7 +15,7 @@ export default function Index({ title, price, image, sizes, type }) {
         <h4 className="pizza-block__title">{title}</h4>
         <div className="pizza-block__selector">
           <ul>
-            {type.map((typeId) => (
+            {type?.map((typeId) => (
               <li
                 key={typeId}
                 onClick={() => setActiveType(typeId)}
@@ -26,7 +26,7 @@ export default function Index({ title, price, image, sizes, type }) {
             ))}
           </ul>
           <ul>
-            {sizes.map((size, index) => (
+            {sizes?.map((size, index) => (
               <li
                 key={index}
                 onClick={() => setActiveSize(index)}
