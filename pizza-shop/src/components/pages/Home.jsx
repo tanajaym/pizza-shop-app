@@ -24,7 +24,10 @@ const Home = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories value={categoryId} />
+        <Categories
+          value={categoryId}
+          onClickCategory={(id) => setCategoryId(id)}
+        />
         <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>

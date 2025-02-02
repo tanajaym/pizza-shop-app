@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Categories(value, onClickCategory) {
+export default function Categories({ value, onClickCategory }) {
   const [activeIndex, setActiveIndex] = React.useState(0);
 
   const categiryList = [
