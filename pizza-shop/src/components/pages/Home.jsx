@@ -22,10 +22,7 @@ const Home = () => {
     //     : `https://6797b1f3c2c861de0c6daede.mockapi.io/items?category${categoryId}`;
     setIsLoading(true);
     fetch(
-      `https://6797b1f3c2c861de0c6daede.mockapi.io/items?${
-        categoryId > 0 ? `category=${categoryId}` : ""
-      }&sortBy=${sort.sortProperty}
-      &order=desc`,
+      `https://6797b1f3c2c861de0c6daede.mockapi.io/items?${categoryId > 0 ? `category=${categoryId}` : ""}&sortBy=${sort.sortProperty}&order=desc`,
     )
       .then((response) => response.json())
       .then((jsonArray) => {
@@ -33,7 +30,7 @@ const Home = () => {
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [categoryId]);
+  }, [categoryId, sort]);
 
   return (
     <div className="container">

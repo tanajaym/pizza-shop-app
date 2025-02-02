@@ -37,7 +37,9 @@ export default function Sort({ value, onChangeSort }) {
               <li
                 key={index}
                 onClick={() => onClickSelectedItem(obj)}
-                className={value === obj.sortProperty ? "active" : ""}
+                className={
+                  value.sortProperty === obj.sortProperty ? "active" : ""
+                }
               >
                 {obj.name}
               </li>
