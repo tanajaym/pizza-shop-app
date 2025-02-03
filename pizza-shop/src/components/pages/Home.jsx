@@ -20,9 +20,10 @@ const Home = () => {
     //   categoryId === 0
     //     ? "https://6797b1f3c2c861de0c6daede.mockapi.io/items?category=" // Все пиццы
     //     : `https://6797b1f3c2c861de0c6daede.mockapi.io/items?category${categoryId}`;
-    setIsLoading(true);
+
+    const category = categoryId > 0 ? `category=${categoryId}` : "";
     fetch(
-      `https://6797b1f3c2c861de0c6daede.mockapi.io/items?${categoryId > 0 ? `category=${categoryId}` : ""}&sortBy=${sort.sortProperty}&order=desc`,
+      `https://6797b1f3c2c861de0c6daede.mockapi.io/items?${category}&sortBy=${sort.sortProperty}&order=desc`,
     )
       .then((response) => response.json())
       .then((jsonArray) => {
