@@ -24,6 +24,7 @@ const Search = ({ searchValue, setSearchValue }) => {
 
       {searchValue && (
         <svg
+          onClick={() => setSearchValue("")}
           className={styles.iconClosing}
           xmlns="http://www.w3.org/2000/svg"
           height="24px"
