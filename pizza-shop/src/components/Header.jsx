@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Link } from "react-router-dom";
-import Search from "./Search/Search";
+import Search from "./search/Search";
 
 export default function Header({ searchValue, setSearchValue }) {
   return (
