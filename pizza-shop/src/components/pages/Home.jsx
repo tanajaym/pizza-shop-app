@@ -14,21 +14,19 @@ const Home = ({ searchValue }) => {
     sortProperty: "rating",
   });
 
-  const pizzas = items
-    .filter((obj) => {
-      if (obj?.title?.includes(searchValue)) return true;
-      return false;
-    })
-    .map((obj) => (
-      <Index
-        key={obj.id}
-        title={obj.title}
-        price={obj.price}
-        image={obj.image}
-        sizes={obj.sizes}
-        type={obj.types}
-      />
-    ));
+  const pizzas = Array.isArray(items)
+    ? items.map((obj) => (
+        <Index
+          key={obj.id}
+          title={obj.title}
+          price={obj.price}
+          image={obj.image}
+          sizes={obj.sizes}
+          type={obj.types}
+        />
+      ))
+    : [];
+  //cheks wether it has a string. If not - place a
 
   const skeleton = [...new Array(6)].map((_, index) => (
     <PizzaBlockSkeleton key={index} />
@@ -36,8 +34,9 @@ const Home = ({ searchValue }) => {
 
   React.useEffect(() => {
     const category = categoryId > 0 ? `category=${categoryId}` : "";
+    const search = searchValue ? `&search=${searchValue}` : "";
     fetch(
-      `https://6797b1f3c2c861de0c6daede.mockapi.io/items?${category}&sortBy=${sort.sortProperty}&order=desc`,
+      `https://6797b1f3c2c861de0c6daede.mockapi.io/items?${category}&sortBy=${sort.sortProperty}&order=desc${search}`,
     )
       .then((response) => response.json())
       .then((jsonArray) => {
@@ -45,7 +44,7 @@ const Home = ({ searchValue }) => {
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [categoryId, sort]);
+  }, [categoryId, sort, searchValue]);
 
   return (
     <div className="container">

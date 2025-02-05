@@ -12,7 +12,6 @@ import Cart from "./components/pages/Cart";
 function App() {
   const [searchValue, setSearchValue] = React.useState("");
 
-  console.log(searchValue, "it works");
   return (
     <div className="App">
       <div className="wrapper">
