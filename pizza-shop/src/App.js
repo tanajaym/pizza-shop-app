@@ -4,6 +4,9 @@ import "./scss/app.scss";
 
 import { Routes, Route } from "react-router-dom";
 import { createContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { decrement, increment } from "./redux/slices/filterSlice";
 
 import Header from "./components/Header";
 import Home from "./components/pages/Home";
@@ -14,6 +17,8 @@ export const SearchContext = React.createContext();
 
 function App() {
   const [searchValue, setSearchValue] = React.useState("");
+  const count = useSelector((state) => state.counter.value);
+  const dispatch = useDispatch();
 
   return (
     <div className="App">

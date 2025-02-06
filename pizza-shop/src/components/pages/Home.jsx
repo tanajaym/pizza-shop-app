@@ -1,5 +1,6 @@
 import React from "react";
 import { SearchContext } from "../../App";
+import { useSelector } from "@reduxjs/toolkit";
 
 import Categories from "../Categories";
 import Sort from "../Sort";
@@ -10,9 +11,10 @@ import Pagination from "../pagination/Pagination";
 const Home = () => {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [categoryId, setCategoryId] = React.useState(0);
+  // const [categoryId, setCategoryId] = React.useState(0);
   const [currentPage, setCurrentPage] = React.useState(1);
   const { searchValue } = React.useContext(SearchContext);
+
   const [sort, setSort] = React.useState({
     name: "популярности",
     sortProperty: "rating",

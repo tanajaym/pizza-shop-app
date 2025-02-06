@@ -5,6 +5,7 @@ import styles from "./Search.module.scss";
 
 const Search = () => {
   const { searchValue, setSearchValue } = React.useContext(SearchContext);
+  //useContext слушает изменение контекста и передает значение в скобах
   return (
     <div className={styles.root}>
       <svg
