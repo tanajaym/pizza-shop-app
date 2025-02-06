@@ -1,4 +1,5 @@
 import React from "react";
+import { SearchContext } from "../../App";
 
 import Categories from "../Categories";
 import Sort from "../Sort";
@@ -6,11 +7,12 @@ import Index from "../PizzaBlock/index";
 import PizzaBlockSkeleton from "../PizzaBlock/PizzaBlockSkeleton";
 import Pagination from "../pagination/Pagination";
 
-const Home = ({ searchValue }) => {
+const Home = () => {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [categoryId, setCategoryId] = React.useState(0);
   const [currentPage, setCurrentPage] = React.useState(1);
+  const { searchValue } = React.useContext(SearchContext);
   const [sort, setSort] = React.useState({
     name: "популярности",
     sortProperty: "rating",
