@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { SearchContext } from "../../App";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -11,26 +12,19 @@ import PizzaBlockSkeleton from "../PizzaBlock/PizzaBlockSkeleton";
 import Pagination from "../pagination/Pagination";
 
 const Home = () => {
-  //
+  const { categoryId, sort } = useSelector((state) => state.filter.categoryId);
   const dispatch = useDispatch();
-  const categoryId = useSelector((state) => state.filter.categoryId);
-  console.log("redux state", categoryId);
-  // const setCategoryId = () => {};
-  //
+  const sortType = sort?.sortProperty;
 
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  // const [categoryId, setCategoryId] = React.useState(0);
   const [currentPage, setCurrentPage] = React.useState(1);
+
   const { searchValue } = React.useContext(SearchContext);
 
-  const [sort, setSort] = React.useState({
-    name: "популярности",
-    sortProperty: "rating",
-  });
+  // const url = `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=4${category}&sortBy=${sort?.sortProperty}&order=desc${search}`;
 
   const onChangeCategory = (id) => {
-    // console.log(id);
     dispatch(setCategoryId(id));
   };
 
@@ -55,22 +49,24 @@ const Home = () => {
   React.useEffect(() => {
     const category = categoryId > 0 ? `category=${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : "";
-    fetch(
-      `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=4${category}&sortBy=${sort.sortProperty}&order=desc${search}`,
-    )
-      .then((response) => response.json())
-      .then((jsonArray) => {
-        setItems(jsonArray);
+
+    axios
+      .get(
+        `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=4${category}&sortBy=${sort?.sortProperty}&order=desc${search}`,
+      )
+      .then((response) => {
+        setItems(response.data);
         setIsLoading(false);
       });
+
     window.scrollTo(0, 0);
-  }, [categoryId, sort, searchValue, currentPage]);
+  }, [categoryId, sortType, searchValue, currentPage]);
 
   return (
     <div className="container">
       <div className="content__top">
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-        <Sort value={sort} onChangeSort={(sortId) => setSort(sortId)} />
+        <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">{isLoading ? skeleton : pizzas}</div>
