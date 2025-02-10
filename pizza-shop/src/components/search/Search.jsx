@@ -5,26 +5,31 @@ import { SearchContext } from "../../App";
 import styles from "./Search.module.scss";
 
 const Search = () => {
-  const { searchValue, setSearchValue } = React.useContext(SearchContext);
+  const [value, setValue] = React.useState("");
+  const { setSearchValue } = React.useContext(SearchContext);
   const inputRef = React.useRef();
   //useContext слушает изменение контекста и передает значение в скобах
-  const testDebounce = React.useCallback(
-    debounce(() => {
-      console.log("test");
-    }, 1000),
-    [],
-    //useCallback берет ссылку на функцию и берет зависимости, которые находятся в []
-    //useEffect просто вызовет функцию, а callback ывзовет и вернет
-  );
+
+  //useCallback берет ссылку на функцию и берет зависимости, которые находятся в []
+  //useEffect просто вызовет функцию, а callback ывзовет и вернет
 
   const onClickClear = () => {
     setSearchValue("");
+    // setValue("");
     inputRef.current?.focus();
   };
 
+  const updateSearchValue = React.useCallback(
+    debounce((str) => {
+      // setSearchValue(str);
+      console.log(str);
+    }, 150),
+    [],
+  );
+
   const onChangeInput = (event) => {
     setSearchValue(event.target.value);
-    testDebounce();
+    updateSearchValue(event.target.value);
   };
   return (
     <div className={styles.root}>
@@ -40,13 +45,13 @@ const Search = () => {
       </svg>
       <input
         input={inputRef}
-        value={searchValue}
+        value={value}
         onChange={onChangeInput}
         className={styles.input}
         placeholder="Найди пиццу..."
       />
 
-      {searchValue && (
+      {value && (
         <svg
           onClick={onClickClear}
           className={styles.iconClosing}
