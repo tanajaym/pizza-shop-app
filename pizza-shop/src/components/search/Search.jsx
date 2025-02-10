@@ -1,19 +1,30 @@
 import React from "react";
+import debounce from "lodash.debounce";
 import { SearchContext } from "../../App";
 
 import styles from "./Search.module.scss";
 
 const Search = () => {
   const { searchValue, setSearchValue } = React.useContext(SearchContext);
+  const inputRef = React.useRef();
   //useContext слушает изменение контекста и передает значение в скобах
-
-  // React.useEffect(() => {
-  //   console.log(document.querySelector("input"));
-  // }, []);
+  const testDebounce = React.useCallback(
+    debounce(() => {
+      console.log("test");
+    }, 1000),
+    [],
+    //useCallback берет ссылку на функцию и берет зависимости, которые находятся в []
+    //useEffect просто вызовет функцию, а callback ывзовет и вернет
+  );
 
   const onClickClear = () => {
     setSearchValue("");
-    document.querySelector("input").focus();
+    inputRef.current?.focus();
+  };
+
+  const onChangeInput = (event) => {
+    setSearchValue(event.target.value);
+    testDebounce();
   };
   return (
     <div className={styles.root}>
@@ -28,8 +39,9 @@ const Search = () => {
         <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
       </svg>
       <input
+        input={inputRef}
         value={searchValue}
-        onChange={(event) => setSearchValue(event.target.value)}
+        onChange={onChangeInput}
         className={styles.input}
         placeholder="Найди пиццу..."
       />
