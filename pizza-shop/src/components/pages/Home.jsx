@@ -57,6 +57,11 @@ const Home = () => {
       .then((response) => {
         setItems(response.data);
         setIsLoading(false);
+      })
+
+      .catch((error) => {
+        console.error("Ошибка при запросе данных:", error);
+        setIsLoading(false);
       });
 
     window.scrollTo(0, 0);
