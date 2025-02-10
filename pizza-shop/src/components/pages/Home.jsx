@@ -52,20 +52,20 @@ const Home = () => {
     const category = categoryId > 0 ? `category=${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : "";
 
-    // axios
-    //   .get(
-    //     `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=4${category}&sortBy=${sort?.sortProperty}&order=desc${search}`,
-    //   )
-    //   .then((response) => {
-    //     setItems(response.data);
-    //     setIsLoading(false);
-    //   })
-    //
-    //   .catch((error) => {
-    //     console.error("Ошибка при запросе данных:", error);
-    //     setIsLoading(false);
-    //     setHasError(true);
-    //   });
+    axios
+      .get(
+        `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=4${category}&sortBy=${sort?.sortProperty}&order=desc${search}`,
+      )
+      .then((response) => {
+        setItems(response.data);
+        setIsLoading(false);
+      })
+
+      .catch((error) => {
+        console.error("Ошибка при запросе данных:", error);
+        setIsLoading(false);
+        setHasError(true);
+      });
 
     window.scrollTo(0, 0);
   }, [categoryId, sortType, searchValue, currentPage]);

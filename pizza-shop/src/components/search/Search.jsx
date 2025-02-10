@@ -6,7 +6,7 @@ import styles from "./Search.module.scss";
 
 const Search = () => {
   const [value, setValue] = React.useState("");
-  const { searchValue, setSearchValue } = React.useContext(SearchContext);
+  const { setSearchValue } = React.useContext(SearchContext);
   const inputRef = React.useRef();
 
   //useCallback берет ссылку на функцию и берет зависимости, которые находятся в []
@@ -15,13 +15,14 @@ const Search = () => {
 
   const onClickClear = () => {
     setSearchValue("");
+    setValue("");
     inputRef.current?.focus();
   };
 
   const updateSearchValue = React.useCallback(
     debounce((str) => {
-      // setSearchValue(str);
-      console.log(str);
+      setSearchValue(str);
+      // console.log(str);
     }, 1000),
     [],
   );
