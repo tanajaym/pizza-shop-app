@@ -21,20 +21,20 @@ function App() {
   const dispatch = useDispatch();
 
   return (
-    <div className="App">
-      <div className="wrapper">
-        <SearchContext.Provider value={{ searchValue, setSearchValue }}>
-          <Header />
-          <div className="content">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </div>
-        </SearchContext.Provider>
+      <div className="App">
+        <div className="wrapper">
+          <SearchContext.Provider value={{ searchValue, setSearchValue }}>
+            <Header />
+            <div className="content">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </div>
+          </SearchContext.Provider>
+        </div>
       </div>
-    </div>
   );
 }
 
