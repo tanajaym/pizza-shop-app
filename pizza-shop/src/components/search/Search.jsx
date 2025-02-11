@@ -16,10 +16,6 @@ const Search = () => {
   const onClickClear = () => {
     setSearchValue("");
     setValue("");
-
-  //useCallback берет ссылку на функцию и берет зависимости, которые находятся в []
-  //useEffect просто вызовет функцию, а callback ывзовет и вернет
-
     inputRef.current?.focus();
   };
 
@@ -27,7 +23,7 @@ const Search = () => {
     debounce((str) => {
       setSearchValue(str);
       // console.log(str);
-    }, 1000),
+    }, 250),
     [],
   );
 

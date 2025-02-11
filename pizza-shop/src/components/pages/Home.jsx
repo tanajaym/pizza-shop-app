@@ -3,7 +3,7 @@ import axios from "axios";
 import { SearchContext } from "../../App";
 import { useSelector, useDispatch } from "react-redux";
 
-import { setCategoryId } from "../../redux/slices/filterSlice";
+import { setCategoryId, setCurrentPage } from "../../redux/slices/filterSlice";
 
 import Categories from "../Categories";
 import Sort from "../Sort";
@@ -13,14 +13,17 @@ import Pagination from "../pagination/Pagination";
 import NotFoundPage from "./NotFoundPage";
 
 const Home = () => {
-  const { categoryId, sort } = useSelector((state) => state.filter.categoryId);
   const dispatch = useDispatch();
+  const { categoryId, sort, currentPage } = useSelector(
+    (state) => state.filter,
+  );
+
   const sortType = sort?.sortProperty;
 
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [currentPage, setCurrentPage] = React.useState(1);
   const [hasError, setHasError] = React.useState(false);
+  // const [currentPage, setCurrentPage] = React.useState(1);
 
   const { searchValue } = React.useContext(SearchContext);
 
@@ -28,6 +31,10 @@ const Home = () => {
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
+  };
+
+  const onChangeCurrentPage = (num) => {
+    dispatch(setCurrentPage(num));
   };
 
   const pizzas = Array.isArray(items)
@@ -81,7 +88,10 @@ const Home = () => {
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">{isLoading ? skeleton : pizzas}</div>
-      <Pagination onChangePage={(pageNum) => setCurrentPage(pageNum)} />
+      <Pagination
+        currentPage={currentPage}
+        onChangePage={onChangeCurrentPage}
+      />
     </div>
   );
   // }
