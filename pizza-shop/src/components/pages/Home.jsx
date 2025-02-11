@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import qs from "qs";
 import { SearchContext } from "../../App";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -76,6 +77,13 @@ const Home = () => {
 
     window.scrollTo(0, 0);
   }, [categoryId, sortType, searchValue, currentPage]);
+
+  // (React.useEffect = () => {
+  //   const queryString = qs.stringify({
+  //     sortProperty: sortType,
+  //   });
+  // }),
+  //   [categoryId, sortType, currentPage];
 
   // if (hasError) {
   //   return <NotFoundPage />;
