@@ -3,6 +3,7 @@ import axios from "axios";
 import qs from "qs";
 import { SearchContext } from "../../App";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { setCategoryId, setCurrentPage } from "../../redux/slices/filterSlice";
 
@@ -14,6 +15,8 @@ import Pagination from "../pagination/Pagination";
 import NotFoundPage from "./NotFoundPage";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const { categoryId, sort, currentPage } = useSelector(
     (state) => state.filter,
@@ -57,6 +60,13 @@ const Home = () => {
   ));
 
   React.useEffect(() => {
+    if (window.location.search) {
+      const param = qs.parse(window.location.search.substring(1));
+      console.log(param);
+    }
+  });
+
+  React.useEffect(() => {
     const category = categoryId > 0 ? `category=${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : "";
 
@@ -78,12 +88,15 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, [categoryId, sortType, searchValue, currentPage]);
 
-  // (React.useEffect = () => {
-  //   const queryString = qs.stringify({
-  //     sortProperty: sortType,
-  //   });
-  // }),
-  //   [categoryId, sortType, currentPage];
+  React.useEffect(() => {
+    const queryString = qs.stringify({
+      sortProperty: sortType,
+      categoryId,
+      currentPage,
+    });
+    // console.log(queryString);
+    navigate(`?${queryString}`);
+  }, [categoryId, sortType, currentPage]);
 
   // if (hasError) {
   //   return <NotFoundPage />;
