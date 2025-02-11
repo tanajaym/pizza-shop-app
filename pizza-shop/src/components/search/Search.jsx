@@ -8,27 +8,31 @@ const Search = () => {
   const [value, setValue] = React.useState("");
   const { setSearchValue } = React.useContext(SearchContext);
   const inputRef = React.useRef();
+
+  //useCallback берет ссылку на функцию и берет зависимости, которые находятся в []
+  //useEffect просто вызовет функцию, а callback ывзовет и вернет
   //useContext слушает изменение контекста и передает значение в скобах
+
+  const onClickClear = () => {
+    setSearchValue("");
+    setValue("");
 
   //useCallback берет ссылку на функцию и берет зависимости, которые находятся в []
   //useEffect просто вызовет функцию, а callback ывзовет и вернет
 
-  const onClickClear = () => {
-    setSearchValue("");
-    // setValue("");
     inputRef.current?.focus();
   };
 
   const updateSearchValue = React.useCallback(
     debounce((str) => {
-      // setSearchValue(str);
-      console.log(str);
-    }, 150),
+      setSearchValue(str);
+      // console.log(str);
+    }, 1000),
     [],
   );
 
   const onChangeInput = (event) => {
-    setSearchValue(event.target.value);
+    setValue(event.target.value);
     updateSearchValue(event.target.value);
   };
   return (
