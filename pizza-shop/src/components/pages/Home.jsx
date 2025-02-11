@@ -5,7 +5,11 @@ import { SearchContext } from "../../App";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { setCategoryId, setCurrentPage } from "../../redux/slices/filterSlice";
+import {
+  setCategoryId,
+  setCurrentPage,
+  setFilters,
+} from "../../redux/slices/filterSlice";
 
 import Categories from "../Categories";
 import Sort from "../Sort";
@@ -64,6 +68,11 @@ const Home = () => {
       const param = qs.parse(window.location.search.substring(1));
       console.log(param);
     }
+    dispatch(
+      setFilters({
+        ...param,
+      }),
+    );
   });
 
   React.useEffect(() => {
