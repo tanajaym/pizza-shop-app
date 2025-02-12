@@ -16,6 +16,7 @@ import Sort from "../Sort";
 import Index from "../PizzaBlock/index";
 import PizzaBlockSkeleton from "../PizzaBlock/PizzaBlockSkeleton";
 import Pagination from "../pagination/Pagination";
+import { sortList } from "../Sort";
 import NotFoundPage from "./NotFoundPage";
 
 const Home = () => {
@@ -74,13 +75,18 @@ const Home = () => {
   React.useEffect(() => {
     if (window.location.search) {
       const param = qs.parse(window.location.search.substring(1));
+      const sort = sortList.find(
+        (obj) => obj.sortProperty === param.sortProperty,
+      );
+
       dispatch(
         setFilters({
           ...param,
+          sort,
         }),
       );
     }
-  });
+  }, []);
   ///////
   //getting data
   ///////
@@ -105,7 +111,7 @@ const Home = () => {
       });
 
     window.scrollTo(0, 0);
-  }, [categoryId, sortType, searchValue, currentPage]);
+  }, [categoryId, sort?.sortProperty, searchValue, currentPage]);
 
   ///////
   //parsing url
@@ -113,12 +119,12 @@ const Home = () => {
 
   React.useEffect(() => {
     const queryString = qs.stringify({
-      sortProperty: sortType,
+      sortProperty: sort?.sortProperty,
       categoryId,
       currentPage,
     });
     navigate(`?${queryString}`);
-  }, [categoryId, sortType, currentPage]);
+  }, [categoryId, sort?.sortProperty, currentPage]);
   //error
 
   return (
