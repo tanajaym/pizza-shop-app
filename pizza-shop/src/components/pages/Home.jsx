@@ -35,8 +35,9 @@ const Home = () => {
 
   const { searchValue } = React.useContext(SearchContext);
 
-  // const url = `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=4${category}&sortBy=${sort?.sortProperty}&order=desc${search}`;
-
+  ///////
+  //calling data from redux
+  ///////
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
   };
@@ -59,29 +60,38 @@ const Home = () => {
     : [];
   //cheks wether it has a string. If not - place a
 
+  ///////
+  //skeleton
+  ///////
+
   const skeleton = [...new Array(6)].map((_, index) => (
     <PizzaBlockSkeleton key={index} />
   ));
 
+  ///////
+  //
+  ///////
   React.useEffect(() => {
     if (window.location.search) {
       const param = qs.parse(window.location.search.substring(1));
-      console.log(param);
+      dispatch(
+        setFilters({
+          ...param,
+        }),
+      );
     }
-    dispatch(
-      setFilters({
-        ...param,
-      }),
-    );
   });
-
+  ///////
+  //getting data
+  ///////
   React.useEffect(() => {
     const category = categoryId > 0 ? `category=${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : "";
+    const sortBy = sort?.sortProperty;
 
     axios
       .get(
-        `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=4${category}&sortBy=${sort?.sortProperty}&order=desc${search}`,
+        `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=4${category}&sortBy=${sortBy}&order=desc${search}`,
       )
       .then((response) => {
         setItems(response.data);
@@ -97,19 +107,20 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, [categoryId, sortType, searchValue, currentPage]);
 
+  ///////
+  //parsing url
+  ///////
+
   React.useEffect(() => {
     const queryString = qs.stringify({
       sortProperty: sortType,
       categoryId,
       currentPage,
     });
-    // console.log(queryString);
     navigate(`?${queryString}`);
   }, [categoryId, sortType, currentPage]);
+  //error
 
-  // if (hasError) {
-  //   return <NotFoundPage />;
-  // } else if (!hasError) {
   return (
     <div className="container">
       <div className="content__top">
