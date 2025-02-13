@@ -29,6 +29,9 @@ const Home = () => {
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
   };
+  // const onChangeSort = (sort) => {
+  //   dispatch(setCategoryId(sort));
+  // };
 
   const pizzas = Array.isArray(items)
     ? items.map((obj) => (
@@ -77,7 +80,9 @@ const Home = () => {
     <div className="container">
       <div className="content__top">
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-        <Sort />
+        <Sort
+        // value={sortType} onChange={(i) => setSort(i)}
+        />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">{isLoading ? skeleton : pizzas}</div>
