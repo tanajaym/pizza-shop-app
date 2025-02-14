@@ -13,18 +13,18 @@ import Pagination from "../pagination/Pagination";
 import NotFoundPage from "./NotFoundPage";
 
 const Home = () => {
-  const { categoryId, sort } = useSelector((state) => state.filter.categoryId);
+  const { categoryId, sort } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
+  // const sortType = useSelector((state) => state.filter.sort.sortProperty);
   const sortType = sort?.sortProperty;
+
+  const { searchValue } = React.useContext(SearchContext);
 
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [currentPage, setCurrentPage] = React.useState(1);
+
   const [hasError, setHasError] = React.useState(false);
-
-  const { searchValue } = React.useContext(SearchContext);
-
-  // const url = `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=4${category}&sortBy=${sort?.sortProperty}&order=desc${search}`;
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
@@ -54,10 +54,9 @@ const Home = () => {
   React.useEffect(() => {
     const category = categoryId > 0 ? `category=${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : "";
-
     axios
       .get(
-        `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=4${category}&sortBy=${sort?.sortProperty}&order=desc${search}`,
+        `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=6${category}&sortBy=${sortType}&order=desc${search}`,
       )
       .then((response) => {
         setItems(response.data);
@@ -73,9 +72,7 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, [categoryId, sortType, searchValue, currentPage]);
 
-  // if (hasError) {
-  //   return <NotFoundPage />;
-  // } else if (!hasError) {
+  console.log(categoryId);
   return (
     <div className="container">
       <div className="content__top">
