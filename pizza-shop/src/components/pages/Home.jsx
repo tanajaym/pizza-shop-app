@@ -56,7 +56,6 @@ const Home = () => {
       .then((response) => {
         setItems(response.data);
         setIsLoading(false);
-        console.log(response);
       })
 
       .catch((error) => {
@@ -68,7 +67,6 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, [categoryId, sortType, searchValue, currentPage]);
 
-  console.log(categoryId);
   return (
     <div className="container">
       <div className="content__top">
