@@ -15,7 +15,6 @@ import NotFoundPage from "./NotFoundPage";
 const Home = () => {
   const { categoryId, sort } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
-  // const sortType = useSelector((state) => state.filter.sort.sortProperty);
   const sortType = sort?.sortProperty;
 
   const { searchValue } = React.useContext(SearchContext);
@@ -52,7 +51,7 @@ const Home = () => {
   ));
 
   React.useEffect(() => {
-    const category = categoryId > 0 ? `category=${categoryId}` : "";
+    const category = categoryId > 0 ? `&category=${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : "";
     axios
       .get(
@@ -61,6 +60,7 @@ const Home = () => {
       .then((response) => {
         setItems(response.data);
         setIsLoading(false);
+        console.log(response);
       })
 
       .catch((error) => {

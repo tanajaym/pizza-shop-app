@@ -6,7 +6,7 @@ import { setSort } from "../redux/slices/filterSlice";
 const sortList = [
   { name: "популярности", sortProperty: "rating" },
   { name: "цене", sortProperty: "price" },
-  { name: "палфавиту", sortProperty: "title" },
+  { name: "алфавиту", sortProperty: "title" },
 ];
 export default function Sort() {
   const dispatch = useDispatch();
