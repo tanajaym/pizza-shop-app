@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { setSort } from "../redux/slices/filterSlice";
 
+
 const sortList = [
   { name: "популярности", sortProperty: "rating" },
   { name: "цене", sortProperty: "price" },
@@ -36,7 +37,7 @@ export default function Sort() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={(onClick) => setOpen(!open)}>{sort.name}</span>
+        <span onClick={(onClick) => setOpen(!open)}>{sort?.name}</span>
       </div>
       {open && (
         <div className="sort__popup">
