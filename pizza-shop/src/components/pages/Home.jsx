@@ -55,12 +55,11 @@ const Home = () => {
     const search = searchValue ? `&search=${searchValue}` : "";
     axios
       .get(
-        `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=6${category}&sortBy=${sortType}&order=desc${search}`,
+        `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=4${category}&sortBy=${sortType}&order=asc${search}`,
       )
       .then((response) => {
         setItems(response.data);
         setIsLoading(false);
-        console.log(response);
       })
 
       .catch((error) => {
@@ -72,14 +71,11 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, [categoryId, sortType, searchValue, currentPage]);
 
-  console.log(categoryId);
   return (
     <div className="container">
       <div className="content__top">
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-        <Sort
-        // value={sortType} onChange={(i) => setSort(i)}
-        />
+        <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">{isLoading ? skeleton : pizzas}</div>
