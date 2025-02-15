@@ -3,12 +3,12 @@ import axios from "axios";
 import qs from "qs";
 import { SearchContext } from "../../App";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import {
   setCategoryId,
-  setCurrentPage,
-  setFilters,
+//   setCurrentPage,
+//   setFilters,
 } from "../../redux/slices/filterSlice";
 
 import Categories from "../Categories";
@@ -20,7 +20,8 @@ import { sortList } from "../Sort";
 import NotFoundPage from "./NotFoundPage";
 
 const Home = () => {
-  const navigate = useNavigate();
+  const { categoryId, sort } = useSelector((state) => state.filter);
+//   const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const { categoryId, sort, currentPage } = useSelector(
@@ -29,12 +30,13 @@ const Home = () => {
 
   const sortType = sort?.sortProperty;
 
+  const { searchValue } = React.useContext(SearchContext);
+
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [hasError, setHasError] = React.useState(false);
-  // const [currentPage, setCurrentPage] = React.useState(1);
+  const [currentPage, setCurrentPage] = React.useState(1);
 
-  const { searchValue } = React.useContext(SearchContext);
+  const [hasError, setHasError] = React.useState(false);
 
   ///////
   //calling data from redux
@@ -42,6 +44,9 @@ const Home = () => {
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
   };
+  // const onChangeSort = (sort) => {
+  //   dispatch(setCategoryId(sort));
+  // };
 
   const onChangeCurrentPage = (num) => {
     dispatch(setCurrentPage(num));
@@ -91,17 +96,18 @@ const Home = () => {
   //getting data
   ///////
   React.useEffect(() => {
-    const category = categoryId > 0 ? `category=${categoryId}` : "";
+    const category = categoryId > 0 ? `&category=${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : "";
-    const sortBy = sort?.sortProperty;
-
+    
     axios
       .get(
-        `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=4${category}&sortBy=${sortBy}&order=desc${search}`,
+        `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=6${category}&sortBy=${sortType}&order=desc${search}`,
+    
       )
       .then((response) => {
         setItems(response.data);
         setIsLoading(false);
+        console.log(response);
       })
 
       .catch((error) => {
@@ -131,7 +137,9 @@ const Home = () => {
     <div className="container">
       <div className="content__top">
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-        <Sort />
+        <Sort
+        // value={sortType} onChange={(i) => setSort(i)}
+        />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">{isLoading ? skeleton : pizzas}</div>
