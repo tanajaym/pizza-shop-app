@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+import qs from "qs";
+import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../App";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -12,6 +14,7 @@ import PizzaBlockSkeleton from "../PizzaBlock/PizzaBlockSkeleton";
 import Pagination from "../pagination/Pagination";
 
 const Home = () => {
+  const navigate = useNavigate();
   const { categoryId, sort, currentPage } = useSelector(
     (state) => state.filter,
   );
@@ -71,6 +74,15 @@ const Home = () => {
       });
 
     window.scrollTo(0, 0);
+  }, [categoryId, sortType, searchValue, currentPage]);
+
+  React.useEffect(() => {
+    const queryString = qs.stringify({
+      sortProperty: sort.sortProperty,
+      categoryId,
+      currentPage,
+    });
+    navigate(`?${queryString}`);
   }, [categoryId, sortType, searchValue, currentPage]);
 
   return (
