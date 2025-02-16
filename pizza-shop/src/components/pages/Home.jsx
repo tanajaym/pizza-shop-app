@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import axios from "axios";
 import qs from "qs";
 import { useNavigate } from "react-router-dom";
@@ -25,6 +25,9 @@ const Home = () => {
     (state) => state.filter,
   );
   const dispatch = useDispatch();
+  const isSearch = React.useRef(false);
+  const isMounted = React.useRef(false);
+
   const sortType = sort?.sortProperty;
 
   const { searchValue } = React.useContext(SearchContext);
@@ -61,24 +64,7 @@ const Home = () => {
     <PizzaBlockSkeleton key={index} />
   ));
 
-  React.useEffect(() => {
-    if (window.location.search) {
-      const param = qs.parse(window.location.search.substring(1));
-
-      const sort = sortList.find(
-        (obj) => obj.sortProperty === param.sortProperty,
-      );
-
-      dispatch(
-        setFilters({
-          ...param,
-          sort,
-        }),
-      );
-    }
-  }, []);
-
-  React.useEffect(() => {
+  const fetchPizza = () => {
     const category = categoryId > 0 ? `&category=${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : "";
     axios
@@ -95,17 +81,51 @@ const Home = () => {
         setIsLoading(false);
         setHasError(true);
       });
+  };
 
+  React.useEffect(() => {
+    if (window.location.search) {
+      const param = qs.parse(window.location.search.substring(1));
+
+      const sort = sortList.find(
+        (obj) => obj.sortProperty === param.sortProperty,
+      );
+
+      dispatch(
+        setFilters({
+          ...param,
+          sort,
+        }),
+      );
+      isSearch.current = true;
+    }
+  }, []);
+
+  React.useEffect(() => {
     window.scrollTo(0, 0);
+
+    if (!isSearch.current) {
+      fetchPizza();
+    }
+
+    isSearch.current = false;
   }, [categoryId, sortType, searchValue, currentPage]);
 
   React.useEffect(() => {
-    const queryString = qs.stringify({
-      sortProperty: sort.sortProperty,
-      categoryId,
-      currentPage,
-    });
-    navigate(`?${queryString}`);
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        sortProperty: sort.sortProperty,
+        categoryId,
+        currentPage,
+      });
+      navigate(`?${queryString}`);
+    }
+
+    isMounted.current = true;
+
+    //on frst render, initial, no state will be rewritten
+    // but the moment, user change sth (sort, ctegory and etc)
+    //it make isMounted true and render the url
   }, [categoryId, sortType, searchValue, currentPage]);
 
   return (
