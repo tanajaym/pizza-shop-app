@@ -5,13 +5,19 @@ import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../App";
 import { useSelector, useDispatch } from "react-redux";
 
-import { setCategoryId, setCurrentPage } from "../../redux/slices/filterSlice";
+import {
+  setCategoryId,
+  setCurrentPage,
+  setFilters,
+} from "../../redux/slices/filterSlice";
 
 import Categories from "../Categories";
 import Sort from "../Sort";
 import Index from "../PizzaBlock/index";
 import PizzaBlockSkeleton from "../PizzaBlock/PizzaBlockSkeleton";
 import Pagination from "../pagination/Pagination";
+
+import { sortList } from "../Sort";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -54,6 +60,23 @@ const Home = () => {
   const skeleton = [...new Array(6)].map((_, index) => (
     <PizzaBlockSkeleton key={index} />
   ));
+
+  React.useEffect(() => {
+    if (window.location.search) {
+      const param = qs.parse(window.location.search.substring(1));
+
+      const sort = sortList.find(
+        (obj) => obj.sortProperty === param.sortProperty,
+      );
+
+      dispatch(
+        setFilters({
+          ...param,
+          sort,
+        }),
+      );
+    }
+  }, []);
 
   React.useEffect(() => {
     const category = categoryId > 0 ? `&category=${categoryId}` : "";
