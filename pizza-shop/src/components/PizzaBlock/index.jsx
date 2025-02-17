@@ -5,10 +5,11 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { addItems } from "../../redux/slices/cartSlice";
 
+const pizzaTypes = ["тонкое", "традиционное"];
+
 export default function Index({ id, title, price, image, sizes, type }) {
   const dispatch = useDispatch();
 
-  const pizzaTypes = ["тонкое", "традиционное"];
   const [activeSize, setActiveSize] = React.useState(0);
   const [activeType, setActiveType] = React.useState(0);
 
@@ -18,7 +19,7 @@ export default function Index({ id, title, price, image, sizes, type }) {
       title,
       price,
       image,
-      type: activeType,
+      type: pizzaTypes[activeType],
       sizes: activeSize,
     };
     dispatch(addItems(items));
