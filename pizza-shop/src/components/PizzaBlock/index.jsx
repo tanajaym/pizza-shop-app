@@ -1,12 +1,28 @@
 // import React, { useState } from "react";
 //тк я добавила React.useState(0), то не надо импортировать{ useState }
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-export default function Index({ title, price, image, sizes, type }) {
+import { addItems } from "../../redux/slices/cartSlice";
+
+export default function Index({ id, title, price, image, sizes, type }) {
+  const dispatch = useDispatch();
+
   const pizzaTypes = ["тонкое", "традиционное"];
-
   const [activeSize, setActiveSize] = React.useState(0);
   const [activeType, setActiveType] = React.useState(0);
+
+  const onClickAdd = () => {
+    const items = {
+      id,
+      title,
+      price,
+      image,
+      type: activeType,
+      sizes: activeSize,
+    };
+    dispatch(addItems(items));
+  };
 
   return (
     <div className="pizza-block-wrapper">
@@ -40,7 +56,7 @@ export default function Index({ title, price, image, sizes, type }) {
         <div className="pizza-block__bottom">
           <div className="pizza-block__price">от {price}</div>
           <button
-            // onClick={countOnClick}
+            onClick={onClickAdd}
             className="button button--outline button--add"
           >
             <svg
