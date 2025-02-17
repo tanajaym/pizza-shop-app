@@ -46,6 +46,20 @@ const Home = () => {
     dispatch(setCurrentPage(pageNum));
   };
 
+  // const onChangeCategory = React.useCallback(
+  //   (id) => {
+  //     dispatch(setCategoryId(id));
+  //   },
+  //   [dispatch],
+  // );
+  //
+  // const onChangePage = React.useCallback(
+  //   (pageNum) => {
+  //     dispatch(setCurrentPage(pageNum));
+  //   },
+  //   [dispatch],
+  // );
+
   const pizzas = Array.isArray(items)
     ? items.map((obj) => (
         <Index
@@ -67,6 +81,7 @@ const Home = () => {
   const fetchPizza = () => {
     const category = categoryId > 0 ? `&category=${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : "";
+
     axios
       .get(
         `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=4${category}&sortBy=${sortType}&order=asc${search}`,
