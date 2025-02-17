@@ -16,6 +16,7 @@ export default function Sort() {
   const sort = useSelector((state) => state.filter.sort);
 
   const [open, setOpen] = React.useState(false);
+
   const onClickSelectedItem = (obj) => {
     dispatch(setSort(obj));
     setOpen(false);
