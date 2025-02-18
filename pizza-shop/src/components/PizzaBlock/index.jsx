@@ -9,6 +9,11 @@ const pizzaTypes = ["тонкое", "традиционное"];
 
 export default function Index({ id, title, price, image, sizes, type }) {
   const dispatch = useDispatch();
+  const cartItem = useSelector((state) =>
+    state.cart.items.find((obj) => obj.id === id),
+  );
+
+  const addedCount = cartItem ? cartItem.count : 0;
 
   const [activeSize, setActiveSize] = React.useState(0);
   const [activeType, setActiveType] = React.useState(0);
@@ -22,6 +27,7 @@ export default function Index({ id, title, price, image, sizes, type }) {
       type: pizzaTypes[activeType],
       sizes: activeSize,
     };
+    console.log("id:", id);
     dispatch(addItems(items));
   };
 
@@ -73,7 +79,7 @@ export default function Index({ id, title, price, image, sizes, type }) {
               />
             </svg>
             <span>Добавить</span>
-            <i>0</i>
+            {addedCount > 0 && <i>{addedCount}</i>}
           </button>
         </div>
       </div>
