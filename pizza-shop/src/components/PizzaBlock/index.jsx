@@ -12,6 +12,7 @@ export default function Index({ id, title, price, image, sizes, type }) {
   const cartItem = useSelector((state) =>
     state.cart.items.find((obj) => obj.id === id),
   );
+  //here I get all items from added pizzas
 
   const addedCount = cartItem ? cartItem.count : 0;
 
