@@ -1,12 +1,35 @@
 // import React, { useState } from "react";
 //тк я добавила React.useState(0), то не надо импортировать{ useState }
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-export default function Index({ title, price, image, sizes, type }) {
-  const pizzaTypes = ["тонкое", "традиционное"];
+import { addItems } from "../../redux/slices/cartSlice";
+
+const pizzaTypes = ["тонкое", "традиционное"];
+
+export default function Index({ id, title, price, image, sizes, type }) {
+  const dispatch = useDispatch();
+  const cartItem = useSelector((state) =>
+    state.cart.items.find((obj) => obj.id === id),
+  );
+  //here I get all items from added pizzas
+
+  const addedCount = cartItem ? cartItem.count : 0;
 
   const [activeSize, setActiveSize] = React.useState(0);
   const [activeType, setActiveType] = React.useState(0);
+
+  const onClickAdd = () => {
+    const items = {
+      id,
+      title,
+      price,
+      image,
+      type: pizzaTypes[activeType],
+      sizes: sizes[activeSize],
+    };
+    dispatch(addItems(items));
+  };
 
   return (
     <div className="pizza-block-wrapper">
@@ -40,7 +63,7 @@ export default function Index({ title, price, image, sizes, type }) {
         <div className="pizza-block__bottom">
           <div className="pizza-block__price">от {price}</div>
           <button
-            // onClick={countOnClick}
+            onClick={onClickAdd}
             className="button button--outline button--add"
           >
             <svg
@@ -56,7 +79,7 @@ export default function Index({ title, price, image, sizes, type }) {
               />
             </svg>
             <span>Добавить</span>
-            <i>0</i>
+            {addedCount > 0 && <i>{addedCount}</i>}
           </button>
         </div>
       </div>
