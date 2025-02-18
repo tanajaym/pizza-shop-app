@@ -9,8 +9,15 @@ export const CartItem = ({ id, title, type, price, count, image }) => {
   const onClickPlus = () => {
     dispatch(addItems({ id }));
   };
+
   const onClickMinus = () => {
     dispatch(minusItems(id));
+  };
+
+  const onClickRemove = () => {
+    if (window.confirm("DELETE? you sure?")) {
+      dispatch(removeItems(id));
+    }
   };
 
   return (
@@ -70,7 +77,7 @@ export const CartItem = ({ id, title, type, price, count, image }) => {
       <div className="cart__item-price">
         <b>{price * count} ₽</b>
       </div>
-      <div className="cart__item-remove">
+      <div onClick={onClickRemove} className="cart__item-remove">
         <div className="button button--outline button--circle">
           <svg
             width="10"
