@@ -5,16 +5,23 @@ import NotFoundBlock from "../notFoundBlock/NotFoundBlock";
 import { useDispatch, useSelector } from "react-redux";
 import CartItem from "../CartItem";
 import { clearItems } from "../../redux/slices/cartSlice";
+import EmptyCart from "../EmptyCart";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const { totalPrice, items } = useSelector((state) => state.cart);
+
+  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
 
   const onClickClearCart = () => {
     if (window.confirm("DELETE ALL? you sure?")) {
       dispatch(clearItems());
     }
   };
+
+  if (!totalPrice) {
+    return <EmptyCart />;
+  }
 
   return (
     <div className="container container--cart">
@@ -103,7 +110,7 @@ const Cart = () => {
           <div className="cart__bottom-details">
             <span>
               {" "}
-              Всего пицц: <b>3 шт.</b>{" "}
+              Всего пицц: <b>{totalCount} шт.</b>{" "}
             </span>
             <span>
               {" "}
