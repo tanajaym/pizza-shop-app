@@ -27,7 +27,6 @@ export default function Index({ id, title, price, image, sizes, type }) {
       type: pizzaTypes[activeType],
       sizes: activeSize,
     };
-    console.log("id:", id);
     dispatch(addItems(items));
   };
 
