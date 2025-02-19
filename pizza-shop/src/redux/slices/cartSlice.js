@@ -44,7 +44,9 @@ const cartSlice = createSlice({
       }, 0);
 
       if (findItems.count === 0) {
-        state.items = state.items.filter((obj) => obj.id !== action.payload);
+        if (window.confirm("DELETE? you sure?")) {
+          state.items = state.items.filter((obj) => obj.id !== action.payload);
+        }
       }
     },
 
