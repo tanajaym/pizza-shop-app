@@ -34,9 +34,6 @@ const Home = () => {
 
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  // const [currentPage, setCurrentPage] = React.useState(1);
-
-  const [hasError, setHasError] = React.useState(false);
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
@@ -79,23 +76,17 @@ const Home = () => {
     <PizzaBlockSkeleton key={index} />
   ));
 
-  const fetchPizza = () => {
+  const fetchPizza = async () => {
     const category = categoryId > 0 ? `&category=${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : "";
 
-    axios
+    const res = await axios
       .get(
         `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=4${category}&sortBy=${sortType}&order=asc${search}`,
       )
       .then((response) => {
         setItems(response.data);
         setIsLoading(false);
-      })
-
-      .catch((error) => {
-        console.error("Ошибка при запросе данных:", error);
-        setIsLoading(false);
-        setHasError(true);
       });
   };
 
