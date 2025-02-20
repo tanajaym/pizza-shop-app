@@ -4,12 +4,14 @@ import qs from "qs";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../App";
 import { useSelector, useDispatch } from "react-redux";
+import { fetchPizza } from "../../redux/slices/pizzaSlice";
 
 import {
   setCategoryId,
   setCurrentPage,
   setFilters,
 } from "../../redux/slices/filterSlice";
+import { setItems } from "../../redux/slices/pizzaSlice";
 
 import Categories from "../Categories";
 import Sort from "../Sort";
@@ -24,6 +26,8 @@ const Home = () => {
   const { categoryId, sort, currentPage } = useSelector(
     (state) => state.filter,
   );
+  const items = useSelector((state) => state.pizza.items);
+
   const dispatch = useDispatch();
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
@@ -32,7 +36,7 @@ const Home = () => {
 
   const { searchValue } = React.useContext(SearchContext);
 
-  const [items, setItems] = React.useState([]);
+  // const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
   const onChangeCategory = (id) => {
@@ -76,7 +80,7 @@ const Home = () => {
     <PizzaBlockSkeleton key={index} />
   ));
 
-  const fetchPizza = async () => {
+  const getPizza = async () => {
     const category = categoryId > 0 ? `&category=${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : "";
 
@@ -84,10 +88,16 @@ const Home = () => {
       const response = await axios.get(
         `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=4${category}&sortBy=${sortType}&order=asc${search}`,
       );
-      setItems(response.data);
+      dispatch(
+        fetchPizza({
+          category,
+          search,
+          sortType,
+        }),
+      );
     } catch (error) {
       console.log(error, "FETCHING ERROR");
-      alert("FETCHING ERROR! PLEASE TRY LATER!");
+      // alert("FETCHING ERROR! PLEASE TRY LATER!");
     } finally {
       setIsLoading(false);
     }
@@ -115,7 +125,7 @@ const Home = () => {
     window.scrollTo(0, 0);
 
     if (!isSearch.current) {
-      fetchPizza();
+      getPizza();
     }
 
     isSearch.current = false;
