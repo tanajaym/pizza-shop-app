@@ -80,14 +80,16 @@ const Home = () => {
     const category = categoryId > 0 ? `&category=${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : "";
 
-    const res = await axios
-      .get(
+    try {
+      const response = await axios.get(
         `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=4${category}&sortBy=${sortType}&order=asc${search}`,
-      )
-      .then((response) => {
-        setItems(response.data);
-        setIsLoading(false);
-      });
+      );
+      setItems(response.data);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error, "FETCHING ERROR");
+    }
   };
 
   React.useEffect(() => {
