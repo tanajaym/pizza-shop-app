@@ -85,10 +85,11 @@ const Home = () => {
         `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=4${category}&sortBy=${sortType}&order=asc${search}`,
       );
       setItems(response.data);
-      setIsLoading(false);
     } catch (error) {
-      setIsLoading(false);
       console.log(error, "FETCHING ERROR");
+      alert("FETCHING ERROR! PLEASE TRY LATER!");
+    } finally {
+      setIsLoading(false);
     }
   };
 
