@@ -25,6 +25,16 @@ body {
 .content {
   padding: 40px 0;
 
+  &__error_info{
+    margin: 10rem auto;
+
+    h2{
+      font-size: 3rem;
+      padding: 3rem;
+      line-height: 55px;
+    }
+  }
+
   &__title {
     margin: 35px 0;
     font-size: 2rem;
