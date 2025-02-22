@@ -5,8 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../App";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPizza } from "../../redux/slices/pizzaSlice";
+import { pizzaDataSelector } from "../../redux/slices/pizzaSlice";
 
 import {
+  filterSelector,
   setCategoryId,
   setCurrentPage,
   setFilters,
@@ -23,10 +25,8 @@ import { sortList } from "../Sort";
 
 const Home = () => {
   const navigate = useNavigate();
-  const { categoryId, sort, currentPage } = useSelector(
-    (state) => state.filter,
-  );
-  const { items, status } = useSelector((state) => state.pizza);
+  const { categoryId, sort, currentPage } = useSelector(filterSelector);
+  const { items, status } = useSelector(pizzaDataSelector);
 
   const dispatch = useDispatch();
   const isSearch = React.useRef(false);

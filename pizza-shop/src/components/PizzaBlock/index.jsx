@@ -4,14 +4,13 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { addItems } from "../../redux/slices/cartSlice";
+import { getCartItemsByIdSelector } from "../../redux/slices/cartSlice";
 
 const pizzaTypes = ["тонкое", "традиционное"];
 
 export default function Index({ id, title, price, image, sizes, type }) {
   const dispatch = useDispatch();
-  const cartItem = useSelector((state) =>
-    state.cart.items.find((obj) => obj.id === id),
-  );
+  const cartItem = useSelector(getCartItemsByIdSelector(id));
   //here I get all items from added pizzas
 
   const addedCount = cartItem ? cartItem.count : 0;
