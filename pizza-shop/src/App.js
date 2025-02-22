@@ -16,25 +16,19 @@ import Cart from "./components/pages/Cart";
 export const SearchContext = React.createContext();
 
 function App() {
-  const [searchValue, setSearchValue] = React.useState("");
-  const count = useSelector((state) => state.counter?.value);
-  const dispatch = useDispatch();
-
   return (
-      <div className="App">
-        <div className="wrapper">
-          <SearchContext.Provider value={{ searchValue, setSearchValue }}>
-            <Header />
-            <div className="content">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="*" element={<NotFoundPage />} />
-              </Routes>
-            </div>
-          </SearchContext.Provider>
+    <div className="App">
+      <div className="wrapper">
+        <Header />
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
         </div>
       </div>
+    </div>
   );
 }
 
