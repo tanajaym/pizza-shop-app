@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import "./scss/app.scss";
+import MainLayout from "./components/MainLayout";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -15,17 +16,18 @@ export const SearchContext = React.createContext();
 function App() {
   return (
     <div className="App">
-      <div className="wrapper">
-        <Header />
-        <div className="content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/PizzaInfo/:id" element={<PizzaInfoCart />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </div>
-      </div>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route path="" element={<Home />} />
+          <Route path="PizzaInfo/:id" element={<PizzaInfoCart />} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+        {/*<Route path="/" element={<Home />} />*/}
+        {/*<Route path="/PizzaInfo/:id" element={<PizzaInfoCart />} />*/}
+        {/*<Route path="/cart" element={<Cart />} />*/}
+        {/*<Route path="*" element={<NotFoundPage />} />*/}
+      </Routes>
     </div>
   );
 }

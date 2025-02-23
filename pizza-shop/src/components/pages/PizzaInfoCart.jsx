@@ -1,10 +1,11 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const PizzaInfoCart = () => {
   const { id } = useParams();
   const [pizza, setPizza] = React.useState();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     async function fetchData() {
@@ -15,6 +16,8 @@ const PizzaInfoCart = () => {
         setPizza(data);
       } catch (error) {
         console.log("error fetching pizzaInfo");
+        alert("error fetching pizzaInfo");
+        navigate("/");
       }
     }
 
