@@ -1,17 +1,18 @@
 import React, { useRef } from "react";
-import axios from "axios";
 import qs from "qs";
 import { useNavigate } from "react-router-dom";
-import { SearchContext } from "../../App";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+
 import { fetchPizza } from "../../redux/slices/pizzaSlice";
+import { pizzaDataSelector } from "../../redux/slices/pizzaSlice";
 
 import {
+  filterSelector,
   setCategoryId,
   setCurrentPage,
   setFilters,
 } from "../../redux/slices/filterSlice";
-import { setItems } from "../../redux/slices/pizzaSlice";
 
 import Categories from "../Categories";
 import Sort from "../Sort";
@@ -23,10 +24,9 @@ import { sortList } from "../Sort";
 
 const Home = () => {
   const navigate = useNavigate();
-  const { categoryId, sort, currentPage } = useSelector(
-    (state) => state.filter,
-  );
-  const { items, status } = useSelector((state) => state.pizza);
+  const { categoryId, sort, currentPage, searchValue } =
+    useSelector(filterSelector);
+  const { items, status } = useSelector(pizzaDataSelector);
 
   const dispatch = useDispatch();
   const isSearch = React.useRef(false);
@@ -34,8 +34,6 @@ const Home = () => {
   // const { items, status } = useSelector((state) => state.pizza);
 
   const sortType = sort?.sortProperty;
-
-  const { searchValue } = React.useContext(SearchContext);
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
@@ -47,6 +45,7 @@ const Home = () => {
 
   const pizzas = Array.isArray(items)
     ? items.map((obj) => (
+        // <Link to={`/PizzaInfo/${obj.id}/`} key={obj.id}>
         <Index
           key={obj.id}
           id={obj.id}
@@ -56,6 +55,7 @@ const Home = () => {
           sizes={obj.sizes}
           type={obj.types}
         />
+        //       </Link>
       ))
     : [];
   //cheks wether it has a string. If not - place a
@@ -68,10 +68,6 @@ const Home = () => {
     const category = categoryId > 0 ? `&category=${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : "";
 
-    // try {
-    //   const response = await axios.get(
-    //     `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=4${category}&sortBy=${sortType}&order=asc${search}`,
-    //   );
     dispatch(
       fetchPizza({
         category,
@@ -80,12 +76,6 @@ const Home = () => {
         currentPage,
       }),
     );
-    //   } catch (error) {
-    //     console.log(error, "FETCHING ERROR");
-    //     // alert("FETCHING ERROR! PLEASE TRY LATER!");
-    //   } finally {
-    //     setIsLoading(false);
-    //   }
 
     window.scrollTo(0, 0);
   };

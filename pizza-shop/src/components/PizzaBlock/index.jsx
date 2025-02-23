@@ -4,14 +4,14 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { addItems } from "../../redux/slices/cartSlice";
+import { getCartItemsByIdSelector } from "../../redux/slices/cartSlice";
+import { Link } from "react-router-dom";
 
 const pizzaTypes = ["тонкое", "традиционное"];
 
 export default function Index({ id, title, price, image, sizes, type }) {
   const dispatch = useDispatch();
-  const cartItem = useSelector((state) =>
-    state.cart.items.find((obj) => obj.id === id),
-  );
+  const cartItem = useSelector(getCartItemsByIdSelector(id));
   //here I get all items from added pizzas
 
   const addedCount = cartItem ? cartItem.count : 0;
@@ -34,8 +34,12 @@ export default function Index({ id, title, price, image, sizes, type }) {
   return (
     <div className="pizza-block-wrapper">
       <div className="pizza-block">
-        <img className="pizza-block__image" src={image} alt="Pizza" />
-        <h4 className="pizza-block__title">{title}</h4>
+        <Link to={`/PizzaInfo/${id}/`}>
+          <img className="pizza-block__image" src={image} alt="Pizza" />
+        </Link>
+        <Link to={`/PizzaInfo/${id}/`}>
+          <h4 className="pizza-block__title">{title}</h4>
+        </Link>
         <div className="pizza-block__selector">
           <ul>
             {type?.map((typeId) => (

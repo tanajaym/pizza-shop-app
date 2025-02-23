@@ -4,11 +4,12 @@ import axios from "axios";
 
 export const fetchPizza = createAsyncThunk(
   "pizza/fetchPizza",
-  async (params) => {
+  async (params, thunkAPI) => {
     const { category, search, sortType, currentPage } = params;
     const response = await axios.get(
       `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=4${category}&sortBy=${sortType}&order=asc${search}`,
     );
+
     return response.data;
   },
 );
@@ -43,6 +44,8 @@ const pizzaSlice = createSlice({
       });
   },
 });
+
+export const pizzaDataSelector = (state) => state.pizza;
 
 export const { setItems } = pizzaSlice.actions;
 
