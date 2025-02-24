@@ -2,9 +2,13 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const PizzaInfoCart = () => {
+const PizzaInfoCart: React.FC = () => {
   const { id } = useParams();
-  const [pizza, setPizza] = React.useState();
+  const [pizza, setPizza] = React.useState<{
+    img: string;
+    title: string;
+    price: number;
+  }>();
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -24,7 +28,7 @@ const PizzaInfoCart = () => {
     fetchData();
   }, []);
 
-  if (!pizza) return "Loading...";
+  if (!pizza) return <>Loading...</>;
 
   return (
     <div className="contentainer">
