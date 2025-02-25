@@ -6,10 +6,25 @@ import { useSelector, useDispatch } from "react-redux";
 import { addItems } from "../../redux/slices/cartSlice";
 import { getCartItemsByIdSelector } from "../../redux/slices/cartSlice";
 import { Link } from "react-router-dom";
+type PizzaBlockProps = {
+  id: string;
+  title: string;
+  price: number;
+  image: string;
+  sizes: number[];
+  type: number[];
+};
 
 const pizzaTypes = ["тонкое", "традиционное"];
 
-export default function Index({ id, title, price, image, sizes, type }) {
+const Index: React.FC<PizzaBlockProps> = ({
+  id,
+  title,
+  price,
+  image,
+  sizes,
+  type,
+}) => {
   const dispatch = useDispatch();
   const cartItem = useSelector(getCartItemsByIdSelector(id));
   //here I get all items from added pizzas
@@ -89,4 +104,5 @@ export default function Index({ id, title, price, image, sizes, type }) {
       </div>
     </div>
   );
-}
+};
+export default Index;

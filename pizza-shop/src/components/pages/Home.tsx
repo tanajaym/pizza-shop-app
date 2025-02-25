@@ -16,13 +16,13 @@ import {
 
 import Categories from "../Categories";
 import Sort from "../Sort";
-import Index from "../PizzaBlock/index";
+import Index from "../PizzaBlock";
 import PizzaBlockSkeleton from "../PizzaBlock/PizzaBlockSkeleton";
 import Pagination from "../pagination/Pagination";
 
 import { sortList } from "../Sort";
 
-const Home = () => {
+const Home: React.FC = () => {
   const navigate = useNavigate();
   const { categoryId, sort, currentPage, searchValue } =
     useSelector(filterSelector);
@@ -35,11 +35,11 @@ const Home = () => {
 
   const sortType = sort?.sortProperty;
 
-  const onChangeCategory = (id) => {
+  const onChangeCategory = (id: number) => {
     dispatch(setCategoryId(id));
   };
 
-  const onChangePage = (pageNum) => {
+  const onChangePage = (pageNum: number) => {
     dispatch(setCurrentPage(pageNum));
   };
 
@@ -69,6 +69,8 @@ const Home = () => {
     const search = searchValue ? `&search=${searchValue}` : "";
 
     dispatch(
+      //FIX
+      //@ts-ignore
       fetchPizza({
         category,
         search,
