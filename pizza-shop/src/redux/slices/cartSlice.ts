@@ -1,13 +1,13 @@
 //дефолтное значение, которое будет в самом начале
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
-type CartItemsType = {
+export type CartItemsType = {
   id: string;
   title: string;
   price: number;
   image: string;
-  type: number;
+  type: string;
   sizes: number;
   count: number;
 };
@@ -27,7 +27,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addItems(state, action) {
+    addItems(state, action: PayloadAction<CartItemsType>) {
       const findItems = state.items.find((obj) => obj.id === action.payload.id);
 
       if (findItems) {
@@ -45,11 +45,11 @@ const cartSlice = createSlice({
       //price * count
     },
 
-    removeItems(state, action) {
+    removeItems(state, action: PayloadAction<string>) {
       state.items = state.items.filter((obj) => obj.id !== action.payload);
     },
 
-    minusItems(state, action) {
+    minusItems(state, action: PayloadAction<string>) {
       const findItems = state.items.find((obj) => obj.id === action.payload);
       if (findItems?.count !== 0) {
         if (findItems) {

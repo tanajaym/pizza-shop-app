@@ -24,7 +24,7 @@ import { sortList } from "../Sort";
 const Home: React.FC = () => {
   const navigate = useNavigate();
   const { categoryId, sort, currentPage, searchValue } =
-      useSelector(filterSelector);
+    useSelector(filterSelector);
 
   const { items, status } = useSelector(pizzaDataSelector);
 
@@ -43,24 +43,24 @@ const Home: React.FC = () => {
   };
 
   const pizzas = Array.isArray(items)
-      ? items.map((obj) => (
-          // <Link to={`/PizzaInfo/${obj.id}/`} key={obj.id}>
-          <Index
-              key={obj.id}
-              id={obj.id}
-              title={obj.title}
-              price={obj.price}
-              image={obj.image}
-              sizes={obj.sizes}
-              type={obj.types}
-          />
-          //       </Link>
+    ? items.map((obj) => (
+        // <Link to={`/PizzaInfo/${obj.id}/`} key={obj.id}>
+        <Index
+          key={obj.id}
+          id={obj.id}
+          title={obj.title}
+          price={obj.price}
+          image={obj.image}
+          sizes={obj.sizes}
+          type={obj.type}
+        />
+        //       </Link>
       ))
-      : [];
+    : [];
   //cheks wether it has a string. If not - place a
 
   const skeleton = [...new Array(6)].map((_, index) => (
-      <PizzaBlockSkeleton key={index} />
+    <PizzaBlockSkeleton key={index} />
   ));
 
   const getPizza = async () => {
@@ -68,14 +68,14 @@ const Home: React.FC = () => {
     const search = searchValue ? `&search=${searchValue}` : "";
 
     dispatch(
-        //FIX
-        //@ts-ignore
-        fetchPizza({
-          category,
-          search,
-          sortType,
-          currentPage,
-        }),
+      //FIX
+      //@ts-ignore
+      fetchPizza({
+        category,
+        search,
+        sortType,
+        currentPage,
+      }),
     );
 
     window.scrollTo(0, 0);
@@ -86,14 +86,14 @@ const Home: React.FC = () => {
       const param = qs.parse(window.location.search.substring(1));
 
       const sort = sortList.find(
-          (obj) => obj.sortProperty === param.sortProperty,
+        (obj) => obj.sortProperty === param.sortProperty,
       );
 
       dispatch(
-          setFilters({
-            ...param,
-            sort,
-          }),
+        setFilters({
+          ...param,
+          sort,
+        }),
       );
       isSearch.current = true;
     }
@@ -127,24 +127,24 @@ const Home: React.FC = () => {
   }, [categoryId, sortType, searchValue, currentPage]);
 
   return (
-      <div className="container">
-        <div className="content__top">
-          <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-          <Sort />
-        </div>
-        <h2 className="content__title">Все пиццы</h2>
-        {status === "error" ? (
-            <div className="content__error_info">
-              <h2>Произошла ошибка :(</h2>
-              <p>Нам очень жаль, попробуйте повторить попытку позже</p>
-            </div>
-        ) : (
-            <div className="content__items">
-              {status === "loading" ? skeleton : pizzas}
-            </div>
-        )}
-        <Pagination currentPage={currentPage} onChangePage={onChangePage} />
+    <div className="container">
+      <div className="content__top">
+        <Categories value={categoryId} onChangeCategory={onChangeCategory} />
+        <Sort />
       </div>
+      <h2 className="content__title">Все пиццы</h2>
+      {status === "rejected" ? (
+        <div className="content__error_info">
+          <h2>Произошла ошибка :(</h2>
+          <p>Нам очень жаль, попробуйте повторить попытку позже</p>
+        </div>
+      ) : (
+        <div className="content__items">
+          {status === "pending" ? skeleton : pizzas}
+        </div>
+      )}
+      <Pagination currentPage={currentPage} onChangePage={onChangePage} />
+    </div>
   );
   // }
 };

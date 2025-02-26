@@ -8,8 +8,8 @@ type PizzaItemsType = {
   title: string;
   price: number;
   image: string;
-  type: number;
-  sizes: number;
+  type: string;
+  sizes: string;
   count: number;
 };
 
@@ -32,7 +32,7 @@ export const fetchPizza = createAsyncThunk(
 
 const initialState: PizzaSliceState = {
   items: [],
-  status: "loading",
+  status: "pending",
 };
 
 const pizzaSlice = createSlice({
