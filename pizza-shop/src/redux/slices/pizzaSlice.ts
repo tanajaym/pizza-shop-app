@@ -1,7 +1,8 @@
 //дефолтное значение, которое будет в самом начале
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { RootState } from "../store";
+import { CartItemsType } from "./cartSlice";
 
 type PizzaItemsType = {
   id: string;
@@ -13,20 +14,31 @@ type PizzaItemsType = {
   count: number;
 };
 
+type FetchParamsType = {
+  category: string;
+  search: string;
+  sortType: string;
+  currentPage: string;
+};
+//type FetchParamsType = Record<string, string>
+//сокращенная запись. в <> значения <передается строка, там бдудут string>
+
 interface PizzaSliceState {
   items: PizzaItemsType[];
   status: "pending" | "fulfilled" | "rejected";
 }
 
-export const fetchPizza = createAsyncThunk(
+export const fetchPizza = createAsyncThunk<PizzaItemsType[], FetchParamsType>(
   "pizza/fetchPizza",
-  async (params, thunkAPI) => {
+  async (params) => {
+    //FetchParamsType for params
     const { category, search, sortType, currentPage } = params;
-    const response = await axios.get(
+    const response = await axios.get<PizzaItemsType[]>(
+      // get вернет массив карт айтемов
       `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=4${category}&sortBy=${sortType}&order=asc${search}`,
     );
-
     return response.data;
+    //CartItemsType[] for data
   },
 );
 
@@ -39,7 +51,7 @@ const pizzaSlice = createSlice({
   name: "pizza",
   initialState,
   reducers: {
-    setItems(state, action) {
+    setItems(state, action: PayloadAction<PizzaItemsType[]>) {
       state.items = action.payload;
     },
   },
