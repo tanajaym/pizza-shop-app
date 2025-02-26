@@ -1,6 +1,24 @@
 //дефолтное значение, которое будет в самом начале
 import { createSlice } from "@reduxjs/toolkit";
-const initialState = {
+import { RootState } from "../store";
+
+type CartItemsType = {
+  id: string;
+  title: string;
+  price: number;
+  image: string;
+  type: number;
+  sizes: number;
+  count: number;
+};
+
+interface CartSliceState {
+  totalPrice: number;
+  items: CartItemsType[];
+  //items это массив карт айтема
+}
+
+const initialState: CartSliceState = {
   totalPrice: 0,
   items: [],
 };
@@ -33,7 +51,7 @@ const cartSlice = createSlice({
 
     minusItems(state, action) {
       const findItems = state.items.find((obj) => obj.id === action.payload);
-      if (findItems.count !== 0) {
+      if (findItems?.count !== 0) {
         if (findItems) {
           findItems.count--;
         }
@@ -43,7 +61,7 @@ const cartSlice = createSlice({
         return obj.price * obj.count + sum;
       }, 0);
 
-      if (findItems.count === 0) {
+      if (findItems?.count === 0) {
         if (window.confirm("DELETE? you sure?")) {
           state.items = state.items.filter((obj) => obj.id !== action.payload);
         }
@@ -57,9 +75,10 @@ const cartSlice = createSlice({
   },
 });
 
-export const cartSelector = (state) => state.cart;
+export const cartSelector = (state: RootState) => state.cart;
 //selector for cart state
-export const getCartItemsByIdSelector = (id) => (state) =>
+export const getCartItemsByIdSelector = (id: string) => (state: RootState) =>
+  //данный state - это весь редакс. Это не тот stat, чтос сверху
   state.cart.items.find((obj) => obj.id === id);
 
 export const { addItems, removeItems, clearItems, minusItems } =

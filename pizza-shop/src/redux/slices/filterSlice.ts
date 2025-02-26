@@ -1,6 +1,20 @@
 //дефолтное значение, которое будет в самом начале
 import { createSlice } from "@reduxjs/toolkit";
-const initialState = {
+import { RootState } from "../store";
+
+type SortType = {
+  name: string;
+  sortProperty: "rating" | "price" | "title";
+};
+
+interface FilterSliceState {
+  categoryId: number;
+  currentPage: number;
+  searchValue: string;
+  sort: SortType;
+}
+
+const initialState: FilterSliceState = {
   categoryId: 0,
   currentPage: 1,
   searchValue: "",
@@ -34,8 +48,8 @@ const filterSlice = createSlice({
   },
 });
 
-export const sortSelector = (state) => state.filter.sort;
-export const filterSelector = (state) => state.filter;
+export const sortSelector = (state: RootState) => state.filter.sort;
+export const filterSelector = (state: RootState) => state.filter;
 
 export const {
   setCategoryId,

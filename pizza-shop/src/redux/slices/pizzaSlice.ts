@@ -1,6 +1,22 @@
 //дефолтное значение, которое будет в самом начале
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { RootState } from "../store";
+
+type PizzaItemsType = {
+  id: string;
+  title: string;
+  price: number;
+  image: string;
+  type: number;
+  sizes: number;
+  count: number;
+};
+
+interface PizzaSliceState {
+  items: PizzaItemsType[];
+  status: "pending" | "fulfilled" | "rejected";
+}
 
 export const fetchPizza = createAsyncThunk(
   "pizza/fetchPizza",
@@ -14,7 +30,7 @@ export const fetchPizza = createAsyncThunk(
   },
 );
 
-const initialState = {
+const initialState: PizzaSliceState = {
   items: [],
   status: "loading",
 };
@@ -31,21 +47,21 @@ const pizzaSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchPizza.pending, (state) => {
-        state.status = "loading";
+        state.status = "pending";
         state.items = [];
       })
       .addCase(fetchPizza.fulfilled, (state, action) => {
         state.items = action.payload;
-        state.status = "OK";
+        state.status = "fulfilled";
       })
       .addCase(fetchPizza.rejected, (state, action) => {
-        state.status = "error";
+        state.status = "rejected";
         state.items = [];
       });
   },
 });
 
-export const pizzaDataSelector = (state) => state.pizza;
+export const pizzaDataSelector = (state: RootState) => state.pizza;
 
 export const { setItems } = pizzaSlice.actions;
 

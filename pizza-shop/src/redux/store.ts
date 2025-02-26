@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-// import counterReducer from "./slices/filterSlice";
 import filter from "./slices/filterSlice";
 import cart from "./slices/cartSlice";
 import pizza from "./slices/pizzaSlice";
@@ -12,4 +11,5 @@ const store = configureStore({
   },
 });
 
+export type RootState = ReturnType<typeof store.getState>;
 export default store;
