@@ -11,7 +11,7 @@ type PizzaBlockProps = {
   title: string;
   price: number;
   image: string;
-  sizes: string[];
+  sizes: number[];
   type: number[];
 };
 

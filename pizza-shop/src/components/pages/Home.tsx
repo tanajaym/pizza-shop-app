@@ -60,6 +60,7 @@ const Home: React.FC = () => {
         //       </Link>
       ))
     : [];
+
   //cheks wether it has a string. If not - place a
 
   const skeleton = [...new Array(6)].map((_, index) => (
@@ -105,7 +106,7 @@ const Home: React.FC = () => {
           categoryId: Number(param.category),
           currentPage: Number(param.currentPage),
           searchValue: param.search,
-          sort: sort ? sort : sortList[0],
+          sort: sort || sortList[0],
         }),
       );
       isSearch.current = true;

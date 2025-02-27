@@ -15,8 +15,8 @@ type PizzaItemsType = {
   title: string;
   price: number;
   image: string;
-  type: string;
-  sizes: string;
+  type: number[];
+  sizes: number[];
   count: number;
 };
 

@@ -8,7 +8,7 @@ export type CartItemsType = {
   price: number;
   image: string;
   type: string;
-  sizes: string;
+  sizes: number;
   count: number;
 };
 
