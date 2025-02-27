@@ -1,13 +1,18 @@
 //дефолтное значение, которое будет в самом начале
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
+export enum SortPropertyValue {
+  RATING = "rating",
+  PRICE = "price",
+  TITLE = "title",
+}
 
-type SortType = {
+export type SortType = {
   name: string;
-  sortProperty: "rating" | "price" | "title";
+  sortProperty: SortPropertyValue;
 };
 
-interface FilterSliceState {
+export interface FilterSliceState {
   categoryId: number;
   currentPage: number;
   searchValue: string;
@@ -20,7 +25,7 @@ const initialState: FilterSliceState = {
   searchValue: "",
   sort: {
     name: "популярности",
-    sortProperty: "rating",
+    sortProperty: SortPropertyValue.RATING,
   },
 };
 

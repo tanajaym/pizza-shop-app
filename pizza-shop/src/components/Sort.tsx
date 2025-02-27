@@ -1,19 +1,23 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { setSort, sortSelector } from "../redux/slices/filterSlice";
+import {
+  setSort,
+  SortPropertyValue,
+  sortSelector,
+} from "../redux/slices/filterSlice";
 
 type SortListType = {
   name: string;
-  sortProperty: string;
+  sortProperty: SortPropertyValue;
 };
 
 //eq to sortList: Array<SortListType>
 //allow  to use both v, but upper one is generic
 export const sortList: SortListType[] = [
-  { name: "популярности", sortProperty: "rating" },
-  { name: "цене", sortProperty: "price" },
-  { name: "алфавиту", sortProperty: "title" },
+  { name: "популярности", sortProperty: SortPropertyValue.RATING },
+  { name: "цене", sortProperty: SortPropertyValue.PRICE },
+  { name: "алфавиту", sortProperty: SortPropertyValue.TITLE },
 ];
 
 export default function Sort() {
