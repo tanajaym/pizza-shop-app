@@ -3,7 +3,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { addItems } from "../../redux/slices/cartSlice";
+import { addItems, CartItemsType } from "../../redux/slices/cartSlice";
 import { getCartItemsByIdSelector } from "../../redux/slices/cartSlice";
 import { Link } from "react-router-dom";
 type PizzaBlockProps = {
@@ -35,13 +35,14 @@ const Index: React.FC<PizzaBlockProps> = ({
   const [activeType, setActiveType] = React.useState(0);
 
   const onClickAdd = () => {
-    const items = {
+    const items: CartItemsType = {
       id,
       title,
       price,
       image,
       type: pizzaTypes[activeType],
       sizes: sizes[activeSize],
+      count: 0,
     };
     dispatch(addItems(items));
   };
