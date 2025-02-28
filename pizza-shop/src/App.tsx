@@ -8,7 +8,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./components/pages/Home";
 import NotFoundPage from "./components/pages/NotFoundPage";
 import Cart from "./components/pages/Cart";
-import PizzaInfoCart from "./components/pages/PizzaInfoCart";
+import PizzaInfoCart from "./components/pages/PizzaInfoCart/PizzaInfoCart";
 
 function App() {
   return (
