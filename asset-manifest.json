@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/pizza-shop/static/css/main.3055b2fa.css",
-    "main.js": "/pizza-shop/static/js/main.56e1b5a1.js",
-    "static/media/empty-cart.png": "/pizza-shop/static/media/empty-cart.db905d1f4b063162f25b.png",
-    "index.html": "/pizza-shop/index.html",
-    "main.3055b2fa.css.map": "/pizza-shop/static/css/main.3055b2fa.css.map",
-    "main.56e1b5a1.js.map": "/pizza-shop/static/js/main.56e1b5a1.js.map"
+    "main.css": "/pizza-shop-app/static/css/main.3055b2fa.css",
+    "main.js": "/pizza-shop-app/static/js/main.9e3c396b.js",
+    "static/media/empty-cart.png": "/pizza-shop-app/static/media/empty-cart.db905d1f4b063162f25b.png",
+    "index.html": "/pizza-shop-app/index.html",
+    "main.3055b2fa.css.map": "/pizza-shop-app/static/css/main.3055b2fa.css.map",
+    "main.9e3c396b.js.map": "/pizza-shop-app/static/js/main.9e3c396b.js.map"
   },
   "entrypoints": [
     "static/css/main.3055b2fa.css",
-    "static/js/main.56e1b5a1.js"
+    "static/js/main.9e3c396b.js"
   ]
 }
