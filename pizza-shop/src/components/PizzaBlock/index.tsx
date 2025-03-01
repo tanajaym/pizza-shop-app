@@ -52,25 +52,8 @@ const Index: React.FC<PizzaBlockProps> = ({
       <div className="pizza-block">
         <Link to={`/PizzaInfo/${id}/`}>
           {/*<img className="pizza-block__image" src={image} alt="Pizza" />*/}
-          <picture data-type="pizza" className="sc-1nf33xi-0 kCbxGq">
-            {/*<source*/}
-            {/*  srcSet="https://media.dodostatic.net/image/r:366x366/0194d4f6904975a5a6427e297591980d.avif 366w,https://media.dodostatic.net/image/r:584x584/0194d4f6904975a5a6427e297591980d.avif 584w,https://media.dodostatic.net/image/r:760x760/0194d4f6904975a5a6427e297591980d.avif 760w,https://media.dodostatic.net/image/r:1875x1875/0194d4f6904975a5a6427e297591980d.avif 1875w"*/}
-            {/*  sizes="584px"*/}
-            {/*/>*/}
-            {/*<source*/}
-            {/*  srcSet="https://media.dodostatic.net/image/r:366x366/0194d4f6904975a5a6427e297591980d.webp 366w,https://media.dodostatic.net/image/r:584x584/0194d4f6904975a5a6427e297591980d.webp 584w,https://media.dodostatic.net/image/r:760x760/0194d4f6904975a5a6427e297591980d.webp 760w,https://media.dodostatic.net/image/r:1875x1875/0194d4f6904975a5a6427e297591980d.webp 1875w"*/}
-            {/*  sizes="584px"*/}
-            {/*/>*/}
-            {/*<source*/}
-            {/*  srcSet="https://media.dodostatic.net/image/r:366x366/0194d4f6904975a5a6427e297591980d.png 366w,https://media.dodostatic.net/image/r:584x584/0194d4f6904975a5a6427e297591980d.png 584w,https://media.dodostatic.net/image/r:760x760/0194d4f6904975a5a6427e297591980d.png 760w,https://media.dodostatic.net/image/r:1875x1875/0194d4f6904975a5a6427e297591980d.png 1875w"*/}
-            {/*  sizes="584px"*/}
-            {/*/>*/}
-            <img
-              alt="Мясной микс с говядиной и колбасками"
-              title="Мясной микс с говядиной и колбасками"
-              className="img"
-              src="https://media.dodostatic.net/image/r:292x292/0194d4f6904975a5a6427e297591980d.jpg"
-            />
+          <picture data-type="pizza" className="pizza-block__image">
+            <img className="pizza-block__image" alt="Pizza" src={image} />
           </picture>
         </Link>
         <Link to={`/PizzaInfo/${id}/`}>
