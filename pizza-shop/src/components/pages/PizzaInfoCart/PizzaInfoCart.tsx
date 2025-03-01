@@ -1,11 +1,12 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import styles from "./PizzaInfoCart.scss";
 
 const PizzaInfoCart: React.FC = () => {
   const { id } = useParams();
   const [pizza, setPizza] = React.useState<{
-    img: string;
+    image: string;
     title: string;
     price: number;
   }>();
@@ -30,9 +31,16 @@ const PizzaInfoCart: React.FC = () => {
 
   if (!pizza) return <>Loading...</>;
 
+  console.log(pizza);
+
   return (
-    <div className="contentainer">
-      <img src={pizza.img} alt="pizza image" />
+    <div className="styles.container">
+      {/*<img src={pizza.img} alt="pizza image" />*/}
+
+      <picture data-type="pizza">
+        <img alt="pizza image" src={pizza.image} />
+      </picture>
+
       <h2>{pizza.title}</h2>
       <p>This is your pizza description</p>
       <h4>{pizza.price}</h4>

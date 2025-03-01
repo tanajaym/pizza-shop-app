@@ -51,7 +51,10 @@ const Index: React.FC<PizzaBlockProps> = ({
     <div className="pizza-block-wrapper">
       <div className="pizza-block">
         <Link to={`/PizzaInfo/${id}/`}>
-          <img className="pizza-block__image" src={image} alt="Pizza" />
+          {/*<img className="pizza-block__image" src={image} alt="Pizza" />*/}
+          <picture data-type="pizza" className="pizza-block__image">
+            <img className="pizza-block__image" alt="Pizza" src={image} />
+          </picture>
         </Link>
         <Link to={`/PizzaInfo/${id}/`}>
           <h4 className="pizza-block__title">{title}</h4>

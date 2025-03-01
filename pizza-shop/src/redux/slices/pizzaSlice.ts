@@ -44,7 +44,6 @@ export const fetchPizza = createAsyncThunk<PizzaItemsType[], FetchParamsType>(
       `https://6797b1f3c2c861de0c6daede.mockapi.io/items?page=${currentPage}&limit=4${category}&sortBy=${sortType}&order=asc${search}`,
     );
     return response.data;
-    //CartItemsType[] for data
   },
 );
 

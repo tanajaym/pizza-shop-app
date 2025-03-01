@@ -91,16 +91,6 @@ const Home: React.FC = () => {
 
       const sort = sortList.find((obj) => obj.sortProperty === param.sortType);
 
-      // if (sort) {
-      //   param.sortType = sort;
-      // }
-
-      // dispatch(
-      //   setFilters({
-      //     ...param,
-      //     sort,
-      //   }),
-      // );
       dispatch(
         setFilters({
           categoryId: Number(param.category),
