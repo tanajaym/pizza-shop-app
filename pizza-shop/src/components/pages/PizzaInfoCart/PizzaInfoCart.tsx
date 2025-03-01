@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import styles from "./PizzaInfoCart.scss";
+import "./PizzaInfoCart.scss";
 
 const PizzaInfoCart: React.FC = () => {
   const { id } = useParams();
@@ -34,16 +34,24 @@ const PizzaInfoCart: React.FC = () => {
   console.log(pizza);
 
   return (
-    <div className="styles.container">
-      {/*<img src={pizza.img} alt="pizza image" />*/}
+    <div className="containerInfo">
+      <div className="containerInfo__img">
+        <picture data-type="pizza">
+          <img alt="pizza image" src={pizza.image} />
+        </picture>
+      </div>
 
-      <picture data-type="pizza">
-        <img alt="pizza image" src={pizza.image} />
-      </picture>
-
-      <h2>{pizza.title}</h2>
-      <p>This is your pizza description</p>
-      <h4>{pizza.price}</h4>
+      <div className="containerInfo__textInfo">
+        <div className="textInfo__title">
+          <h2>{pizza.title}</h2>
+        </div>
+        <div className="textInfo__description">
+          <p>This is your pizza description. It's really delicious!</p>
+        </div>
+        <div className="textInfo__price">
+          <h4>{pizza.price} р.</h4>
+        </div>
+      </div>
     </div>
   );
 };
