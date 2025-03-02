@@ -13,10 +13,6 @@
       flex-direction: column;
       .header__cart{
         margin-top: 2rem;
-        //margin-bottom: 1rem;
-        //position: absolute;
-        //top: 9.4em;
-        //right: 3.5rem;
     }
 
     @media (max-width: 50rem){
@@ -31,6 +27,7 @@
         //тк позиция абсолют
       }
     }
+
   }
 
   &__logo {
@@ -53,4 +50,8 @@
     }
   }
 }
+
+  @media(max-width: 28rem) {
+      padding: 1.5rem 0;
+  }
 }

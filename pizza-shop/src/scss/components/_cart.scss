@@ -1,0 +1,13 @@
+.cart__item{
+
+  @media (max-width: 48rem) {
+    .pizza-block__image{
+      margin: 0 1rem 0 0 ;
+    }
+  }
+
+  &-info{
+    position: relative;
+    font-size: 20px;
+  }
+}

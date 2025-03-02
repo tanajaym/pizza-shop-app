@@ -95,8 +95,6 @@ body {
       }
     }
   }
-/////////////////////
-  /////////////////
   .containerInfo{
     position: relative;
     display: flex;
@@ -167,14 +165,10 @@ body {
       margin: 0 0 2rem 0 ;
       padding: 0;
     }
-
-
+    
 
   }
-
 }
-///////////////////
-/////////////////
 .container {
   width: $container-width;
   margin: 0 auto;
@@ -195,9 +189,8 @@ body {
     align-items: center;
   }
 
-  .content__items{
+  .content__items {
     display: block;
-
   }
 
   .content__title {
@@ -211,6 +204,7 @@ body {
       width: 30px;
       height: 30px;
       margin-right: 10px;
+
       path {
         stroke: $black;
         stroke-width: 1.9;
@@ -243,6 +237,7 @@ body {
           stroke: darken($color: #b6b6b6, $amount: 50);
         }
       }
+
       span {
         color: darken($color: #b6b6b6, $amount: 50);
       }
@@ -285,6 +280,13 @@ body {
         font-size: 18px;
         color: #8d8d8d;
       }
+
+      @media (max-width: 45rem) {
+        padding: 0 0 0 2rem;;
+        h3{
+          padding: 1rem;
+        }
+      }
     }
 
     &-count {
@@ -325,6 +327,11 @@ body {
       justify-content: flex-end;
       width: 4%;
 
+      @media (max-width: 45rem) {
+        margin-left: 3rem;
+
+      }
+
       .button {
         border-color: darken($color: $gray-line, $amount: 10);
       }
@@ -343,6 +350,7 @@ body {
           height: 11.5px;
           position: relative;
         }
+
         &:hover,
         &:active {
           border-color: darken($color: $gray-line, $amount: 80);
@@ -350,6 +358,27 @@ body {
         }
       }
     }
+
+    &__price-count-block{
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+
+      @media (max-width: 45rem) {
+        display: grid;
+        padding: 0 0 0 3rem;
+        white-space: nowrap;
+
+        .cart__item-price b{
+          margin-left: 3.2rem;
+        }
+
+
+
+
+      }
+    }
+
   }
 
   &__bottom {
@@ -400,6 +429,7 @@ body {
 
         svg {
           margin-right: 12px;
+
           path {
             fill: transparent;
             stroke-width: 2;
@@ -450,6 +480,22 @@ body {
       margin: 0 auto;
       font-weight: 600;
       font-size: 18px;
+    }
+    @media (max-width: 37rem) {
+      width: 16rem;
+      //height: 16rem;
+
+      img{
+        margin: 35px auto 50px;
+      }
+
+      h2{
+        font-size: 28px;
+      }
+      p{
+        font-size: 15px;
+        width: 100%;
+      }
     }
   }
 }
