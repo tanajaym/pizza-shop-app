@@ -18,8 +18,8 @@ function App() {
           <Route path="" element={<Home />} />
           <Route path="PizzaInfo/:id" element={<PizzaInfoCart />} />
           <Route path="cart" element={<Cart />} />
-          <Route path="*" element={<NotFoundPage />} />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );
