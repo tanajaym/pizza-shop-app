@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  @media (max-width: 28rem) {
+  height: 100vh;
+  }
 }
 
 .App-logo {
