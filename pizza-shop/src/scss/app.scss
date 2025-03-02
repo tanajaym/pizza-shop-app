@@ -281,8 +281,11 @@ body {
         color: #8d8d8d;
       }
 
-      @media (max-width: 28rem) {
+      @media (max-width: 45rem) {
         padding: 0 0 0 2rem;;
+        h3{
+          padding: 1rem;
+        }
       }
     }
 
@@ -323,10 +326,10 @@ body {
       align-items: center;
       justify-content: flex-end;
       width: 4%;
-      
-      @media (max-width: 28rem) {
+
+      @media (max-width: 45rem) {
         margin-left: 3rem;
-        
+
       }
 
       .button {
@@ -361,7 +364,7 @@ body {
       display: flex;
       justify-content: space-around;
 
-      @media (max-width: 28rem) {
+      @media (max-width: 45rem) {
         display: grid;
         padding: 0 0 0 3rem;
         white-space: nowrap;
@@ -369,23 +372,12 @@ body {
         .cart__item-price b{
           margin-left: 3.2rem;
         }
-        
+
 
 
 
       }
     }
-    //@media(max-width: 28rem){
-    //  .pcd{
-    //    display: flex;
-    //  }
-    //  .__pc {
-    //    position: relative;
-    //    display:flex;
-    //    flex-direction: row-reverse;
-    //    padding: 0 0 0 1rem;
-    //  }
-    //}
 
   }
 

@@ -18,10 +18,3 @@ if (rootElement) {
     </BrowserRouter>,
   );
 }
-// root.render(
-//   <BrowserRouter>
-//     <Provider store={store}>
-//       <App />
-//     </Provider>
-//   </BrowserRouter>,
-// );
