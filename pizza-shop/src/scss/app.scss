@@ -280,6 +280,10 @@ body {
         font-size: 18px;
         color: #8d8d8d;
       }
+
+      @media (max-width: 28rem) {
+        padding: 0 0 0 2rem;;
+      }
     }
 
     &-count {
@@ -319,6 +323,11 @@ body {
       align-items: center;
       justify-content: flex-end;
       width: 4%;
+      
+      @media (max-width: 28rem) {
+        margin-left: 3rem;
+        
+      }
 
       .button {
         border-color: darken($color: $gray-line, $amount: 10);
@@ -346,6 +355,38 @@ body {
         }
       }
     }
+
+    &__price-count-block{
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+
+      @media (max-width: 28rem) {
+        display: grid;
+        padding: 0 0 0 3rem;
+        white-space: nowrap;
+
+        .cart__item-price b{
+          margin-left: 3.2rem;
+        }
+        
+
+
+
+      }
+    }
+    //@media(max-width: 28rem){
+    //  .pcd{
+    //    display: flex;
+    //  }
+    //  .__pc {
+    //    position: relative;
+    //    display:flex;
+    //    flex-direction: row-reverse;
+    //    padding: 0 0 0 1rem;
+    //  }
+    //}
+
   }
 
   &__bottom {

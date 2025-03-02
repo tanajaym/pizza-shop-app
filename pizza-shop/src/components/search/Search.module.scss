@@ -12,11 +12,11 @@
   font-size: 1rem;
 
   &:focus{
-    border: solid 0.06rem rgba(0, 0, 0, 0.3);
-    //width: 28rem;
-    //height: 3rem;
-    //border-radius: 1.5rem;
-    //padding-top: 0.5rem;
+    border: solid 0.06rem rgba(0, 0, 0, 0.5);
+  }
+  
+  @media (max-width: 28rem) {
+    width: 20rem;
   }
 }
 
